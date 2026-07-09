@@ -1,20 +1,22 @@
 "use client";
 import { motion } from "framer-motion";
 import SectionHeading from "./SectionHeading";
-
-const groups = [
-  { name: "Simulation", skills: [{n:"STAR-CCM+",l:90},{n:"CFD Modeling",l:85},{n:"AutoCAD",l:80},{n:"Revit",l:70},{n:"ArcGIS",l:65}] },
-  { name: "Programming", skills: [{n:"Python",l:85},{n:"MATLAB",l:80},{n:"SQL",l:75},{n:"Data Analysis",l:85}] },
-  { name: "Languages", skills: [{n:"English (CET-6)",l:80},{n:"Academic Writing",l:82},{n:"Conference Present.",l:75}] },
-  { name: "General", skills: [{n:"Technical Writing",l:88},{n:"Project Mgmt",l:78},{n:"Social Media",l:75},{n:"MS Office",l:90}] },
-];
-const scroll = ["STAR-CCM+","CFD Modeling","Python","MATLAB","AutoCAD","SQL","English CET-6","Data Analysis","Revit","ArcGIS","MS Office"];
+import { useT } from "@/i18n/LanguageContext";
 
 export default function Skills() {
+  const { t: tt, lang } = useT();
+  const groups = [
+    { name: tt("skills.g1"), skills: [{n:"STAR-CCM+",l:90},{n:tt("skills.sCFD"),l:85},{n:"AutoCAD",l:80},{n:"Revit",l:70},{n:"ArcGIS",l:65}] },
+    { name: tt("skills.g2"), skills: [{n:"Python",l:85},{n:"MATLAB",l:80},{n:"SQL",l:75},{n:tt("skills.sData"),l:85}] },
+    { name: tt("skills.g3"), skills: [{n:tt("skills.sEng"),l:80},{n:tt("skills.sWriting"),l:82},{n:tt("skills.sPresent"),l:75}] },
+    { name: tt("skills.g4"), skills: [{n:tt("skills.sDoc"),l:88},{n:tt("skills.sMgmt"),l:78},{n:tt("skills.sSocial"),l:75},{n:"MS Office",l:90}] },
+  ];
+  const scroll = ["STAR-CCM+",tt("skills.sCFD"),"Python","MATLAB","AutoCAD","SQL",tt("skills.sEng"),tt("skills.sData"),"Revit","ArcGIS","MS Office"];
+
   return (
     <section id="skills" className="py-32 px-6 bg-[#0f0f0f]">
       <div className="max-w-7xl mx-auto">
-        <SectionHeading label="Skills" title="Technical Expertise" />
+        <SectionHeading label={tt("skills.label")} title={tt("skills.title")} />
         <div className="max-w-3xl mx-auto mb-16 overflow-hidden rounded-2xl glass-heavy py-5">
           <div className="flex gap-8 animate-marquee whitespace-nowrap">
             {[...scroll,...scroll].map((t,i) => <span key={i} className="text-sm font-semibold text-[#a78bfa] bg-[#8b5cf6]/[0.06] px-5 py-2.5 rounded-full border border-[#8b5cf6]/10 shrink-0">{t}</span>)}

@@ -1,24 +1,24 @@
 "use client";
 import { motion } from "framer-motion";
 import SectionHeading from "./SectionHeading";
-
-const stats = [
-  { v: "90.48", u: "/100", l: "Master GPA", s: "Top 6%" },
-  { v: "5", u: " papers", l: "Publications", s: "Nature sub-journal" },
-  { v: "3", u: "", l: "Patents", s: "Invention + Utility" },
-  { v: "10+", u: "", l: "Awards", s: "University+" },
-];
+import { useT } from "@/i18n/LanguageContext";
 
 export default function About() {
+  const { t: tt } = useT();
+  const stats = [
+    { v: "90.48", u: "/100", l: tt("about.stat1"), s: tt("about.stat1sub") },
+    { v: "5", u: " " + (tt("about.label") === "关于" ? "篇" : "papers"), l: tt("about.stat2"), s: tt("about.stat2sub") },
+    { v: "3", u: " " + (tt("about.label") === "关于" ? "项" : ""), l: tt("about.stat3"), s: tt("about.stat3sub") },
+    { v: "10+", u: "", l: tt("about.stat4"), s: tt("about.stat4sub") },
+  ];
+
   return (
     <section id="about" className="py-32 px-6 bg-[#0f0f0f]">
       <div className="max-w-7xl mx-auto">
-        <SectionHeading label="About" title="Marine Engineering Researcher" />
+        <SectionHeading label={tt("about.label")} title={tt("about.title")} />
         <div className="grid lg:grid-cols-2 gap-20 items-start">
           <motion.div className="space-y-5 text-white/45 leading-relaxed" initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-            <p>Currently pursuing a Master's in <strong className="text-white/80 font-semibold">Hydraulic Engineering at Ocean University of China (985)</strong>, specializing in <strong className="text-[#a78bfa] font-semibold">CFD numerical simulation</strong> and <strong className="text-[#a78bfa] font-semibold">fluid-structure interaction</strong> for marine engineering.</p>
-            <p>Graduated from Jimei University with a bachelor's in Port & Coastal Engineering, ranking <strong className="text-white/80 font-semibold">top 5% (2/46)</strong>. Currently maintaining <strong className="text-white/80 font-semibold">top 6% (3/34)</strong> in graduate studies with a National Scholarship.</p>
-            <p>Proficient in <strong className="text-white/80 font-semibold">Python, STAR-CCM+, MATLAB</strong> for engineering simulation, with extensive experience in hydrodynamic analysis and underwater acoustic signal processing.</p>
+            <p>{tt("about.p1")}</p><p>{tt("about.p2")}</p><p>{tt("about.p3")}</p>
           </motion.div>
           <motion.div className="grid grid-cols-2 gap-3" initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.15 }}>
             {stats.map((s, i) => (

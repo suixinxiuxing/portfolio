@@ -1,14 +1,16 @@
 "use client";
 import { FiGithub, FiMail, FiHeart } from "react-icons/fi";
+import { useT } from "@/i18n/LanguageContext";
 
 export default function Footer() {
+  const { t: tt } = useT();
   return (
     <footer className="bg-[#0a0a0a] border-t border-white/[0.03]">
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="text-center sm:text-left">
             <div className="text-lg font-bold text-white">CX<span className="text-[#8b5cf6]">.</span></div>
-            <p className="text-[10px] text-white/15 mt-0.5">Ocean University of China · Marine CFD</p>
+            <p className="text-[10px] text-white/15 mt-0.5">{tt("footer.tagline")}</p>
           </div>
           <div className="flex items-center gap-6 text-[10px] text-white/20 font-medium uppercase tracking-wider">
             <a href="#hero" className="hover:text-white/50 transition-colors">Home</a>

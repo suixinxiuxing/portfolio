@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import Providers from "@/components/Providers";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -19,10 +20,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="zh-CN" className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased scroll-smooth`}>
       <body className="min-h-full flex flex-col bg-[#0a0a0a] text-[#fafafa]">
-        <div className="bg-grain" />
-        <Navbar />
-        <main className="flex-1 relative z-10">{children}</main>
-        <Footer />
+        <Providers>
+          <div className="bg-grain" />
+          <Navbar />
+          <main className="flex-1 relative z-10">{children}</main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
