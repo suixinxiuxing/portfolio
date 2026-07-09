@@ -24,62 +24,37 @@ export default function Contact() {
   return (
     <>
       <WaveDivider color="light" />
-      <section id="contact" className="py-24 px-6 bg-[#f0f9ff]">
-        <div className="max-w-6xl mx-auto">
+      <section id="contact" className="py-32 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
           <SectionHeading label="联系" title="Get In Touch" />
 
-          <div className="max-w-3xl mx-auto grid sm:grid-cols-2 gap-10">
-            <motion.div
-              className="space-y-5"
-              initial={{ opacity: 0, x: -15 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <p className="text-slate-500 text-sm leading-relaxed mb-6">
+          <div className="max-w-4xl mx-auto grid sm:grid-cols-2 gap-14">
+            <motion.div className="space-y-6" initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+              <p className="text-slate-500 text-base leading-relaxed">
                 如果你对我的研究方向感兴趣，或希望展开合作，欢迎随时联系我。期待与你交流！
               </p>
               {contactInfo.map((item) => (
                 <div key={item.label} className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-white border border-sky-100 flex items-center justify-center text-[#0e7490] shrink-0">
+                  <div className="w-11 h-11 rounded-xl bg-[#eff6ff] border border-blue-100 flex items-center justify-center text-[#2563eb] shrink-0">
                     {item.icon}
                   </div>
                   <div>
-                    <p className="text-[10px] text-slate-400 uppercase tracking-wider font-medium">{item.label}</p>
+                    <p className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">{item.label}</p>
                     {item.href ? (
-                      <a href={item.href} className="text-sm text-slate-600 hover:text-[#0e7490] transition-colors">
-                        {item.value}
-                      </a>
+                      <a href={item.href} className="text-sm text-slate-600 hover:text-[#2563eb] transition-colors font-medium">{item.value}</a>
                     ) : (
-                      <p className="text-sm text-slate-600">{item.value}</p>
+                      <p className="text-sm text-slate-600 font-medium">{item.value}</p>
                     )}
                   </div>
                 </div>
               ))}
             </motion.div>
 
-            <motion.form
-              onSubmit={handleSubmit}
-              className="space-y-4"
-              initial={{ opacity: 0, x: 15 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <input
-                type="text" placeholder="你的名字" required
-                className="w-full px-4 py-3 rounded-xl bg-white border border-sky-100 text-sm text-slate-700 placeholder:text-slate-300 focus:outline-none focus:border-[#0e7490]/40 transition-colors"
-              />
-              <input
-                type="email" placeholder="你的邮箱" required
-                className="w-full px-4 py-3 rounded-xl bg-white border border-sky-100 text-sm text-slate-700 placeholder:text-slate-300 focus:outline-none focus:border-[#0e7490]/40 transition-colors"
-              />
-              <textarea
-                placeholder="留言内容..." rows={4} required
-                className="w-full px-4 py-3 rounded-xl bg-white border border-sky-100 text-sm text-slate-700 placeholder:text-slate-300 focus:outline-none focus:border-[#0e7490]/40 transition-colors resize-none"
-              />
-              <button
-                type="submit"
-                className="w-full px-6 py-3 rounded-full bg-[#0e7490] text-white hover:bg-[#0c2d48] transition-all duration-300 font-medium text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#0e7490]/15"
-              >
+            <motion.form onSubmit={handleSubmit} className="space-y-4" initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+              <input type="text" placeholder="你的名字" required className="w-full px-5 py-3.5 rounded-xl bg-white border border-slate-200 text-sm text-slate-700 placeholder:text-slate-300 focus:outline-none focus:border-[#2563eb]/40 focus:ring-2 focus:ring-[#2563eb]/5 transition-all font-medium" />
+              <input type="email" placeholder="你的邮箱" required className="w-full px-5 py-3.5 rounded-xl bg-white border border-slate-200 text-sm text-slate-700 placeholder:text-slate-300 focus:outline-none focus:border-[#2563eb]/40 focus:ring-2 focus:ring-[#2563eb]/5 transition-all font-medium" />
+              <textarea placeholder="留言内容..." rows={4} required className="w-full px-5 py-3.5 rounded-xl bg-white border border-slate-200 text-sm text-slate-700 placeholder:text-slate-300 focus:outline-none focus:border-[#2563eb]/40 focus:ring-2 focus:ring-[#2563eb]/5 transition-all resize-none font-medium" />
+              <button type="submit" className="w-full px-6 py-3.5 rounded-full bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-all duration-300 font-semibold text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#2563eb]/15 hover:shadow-xl hover:shadow-[#2563eb]/20">
                 {submitted ? "✓ 发送成功！" : <><FiSend size={14} /> 发送消息</>}
               </button>
             </motion.form>

@@ -37,61 +37,53 @@ export default function Education() {
   return (
     <>
       <WaveDivider flip color="white" />
-      <section id="education" className="py-24 px-6 bg-white">
-        <div className="max-w-6xl mx-auto">
+      <section id="education" className="py-32 px-6 bg-[#f8fafc]">
+        <div className="max-w-7xl mx-auto">
           <SectionHeading label="教育经历" title="学海无涯" />
 
-          <div className="relative max-w-3xl mx-auto">
-            <div className="absolute left-[19px] top-2 bottom-2 w-[2px] bg-gradient-to-b from-sky-200 via-[#0e7490]/40 to-sky-200 hidden sm:block" />
+          <div className="relative max-w-4xl mx-auto">
+            <div className="absolute left-[19px] top-2 bottom-2 w-[2px] bg-gradient-to-b from-blue-200 via-[#2563eb]/30 to-blue-200 hidden sm:block" />
 
-            <div className="space-y-10">
+            <div className="space-y-12">
               {educations.map((edu, i) => (
                 <motion.div
                   key={edu.school}
                   className="relative pl-14 sm:pl-16"
-                  initial={{ opacity: 0, y: 25 }}
+                  initial={{ opacity: 0, y: 32 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.15 }}
+                  transition={{ delay: i * 0.15, duration: 0.5 }}
                 >
-                  <div className="absolute left-[14px] top-2 w-[12px] h-[12px] rounded-full bg-[#0e7490] border-[3px] border-white ring-2 ring-[#0e7490]/30 hidden sm:block" />
+                  <div className="absolute left-[13px] top-2 w-[14px] h-[14px] rounded-full bg-[#2563eb] border-[3px] border-[#f8fafc] ring-2 ring-[#2563eb]/25 hidden sm:block" />
 
-                  <div className="card p-6 sm:p-7">
+                  <div className="card-premium p-7 sm:p-8">
                     <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
                       <div>
-                        <h3 className="text-lg font-semibold text-[#0c2d48]">
-                          {edu.school}
-                        </h3>
-                        <p className="text-sm text-[#0e7490]/70">{edu.degree}</p>
+                        <h3 className="text-xl font-bold text-[#0f172a]">{edu.school}</h3>
+                        <p className="text-sm text-[#2563eb]/70 font-medium">{edu.degree}</p>
                       </div>
-                      {edu.current && (
-                        <span className="tag">在读</span>
-                      )}
+                      {edu.current && <span className="tag-ocean">在读</span>}
                     </div>
 
                     <div className="flex flex-wrap gap-4 text-xs text-slate-400 mb-4">
-                      <span className="flex items-center gap-1">
-                        <FiClock size={11} /> {edu.period}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <FiMapPin size={11} /> {edu.location}
-                      </span>
+                      <span className="flex items-center gap-1"><FiClock size={11} /> {edu.period}</span>
+                      <span className="flex items-center gap-1"><FiMapPin size={11} /> {edu.location}</span>
                     </div>
 
                     <div className="grid sm:grid-cols-2 gap-3 mb-4">
-                      <div className="bg-[#f0f9ff] rounded-xl p-3 text-center">
-                        <div className="text-lg font-bold text-[#0c2d48]">{edu.gpa}</div>
-                        <div className="text-[10px] text-slate-400 mt-0.5">GPA / 均分</div>
+                      <div className="bg-[#f8fafc] rounded-xl p-3 text-center">
+                        <div className="text-lg font-bold text-[#0f172a]">{edu.gpa}</div>
+                        <div className="text-[10px] text-slate-400 mt-0.5 uppercase tracking-wider">GPA / 均分</div>
                       </div>
-                      <div className="bg-[#f0f9ff] rounded-xl p-3 text-center">
-                        <div className="text-base font-bold text-[#0e7490]">{edu.rank}</div>
-                        <div className="text-[10px] text-slate-400 mt-0.5">专业排名</div>
+                      <div className="bg-[#eff6ff] rounded-xl p-3 text-center">
+                        <div className="text-base font-bold text-[#2563eb]">{edu.rank}</div>
+                        <div className="text-[10px] text-slate-400 mt-0.5 uppercase tracking-wider">专业排名</div>
                       </div>
                     </div>
 
                     <div className="flex flex-wrap gap-1.5">
                       {edu.awards.map((a) => (
-                        <span key={a} className="tag-plain tag text-xs">{a}</span>
+                        <span key={a} className="tag-muted tag-ocean text-xs">{a}</span>
                       ))}
                     </div>
                   </div>

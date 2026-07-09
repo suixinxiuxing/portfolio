@@ -36,53 +36,43 @@ export default function Projects() {
   return (
     <>
       <WaveDivider flip color="white" />
-      <section id="projects" className="py-24 px-6 bg-white">
-        <div className="max-w-6xl mx-auto">
+      <section id="projects" className="py-32 px-6 bg-[#f8fafc]">
+        <div className="max-w-7xl mx-auto">
           <SectionHeading label="项目" title="科创实践" />
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {projects.map((proj, i) => (
-              <SpotlightCard
-                key={proj.title}
-                className="card p-6 sm:p-7 h-full flex flex-col rounded-[14px]"
-              >
+              <SpotlightCard key={proj.title} className="card-premium p-7 sm:p-8 h-full flex flex-col rounded-[16px]">
                 <motion.div
                   className="flex flex-col h-full"
-                  initial={{ opacity: 0, y: 25 }}
+                  initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.15 }}
+                  transition={{ delay: i * 0.1, duration: 0.4 }}
                 >
-                  <div className="flex items-start justify-between mb-2">
-                    <h3 className="text-xl font-bold text-[#0c2d48]">
-                      {proj.title}
-                    </h3>
-                    <span className="text-[10px] text-slate-400 mt-1.5 shrink-0 font-mono">
-                      {proj.period}
-                    </span>
+                  <div className="flex items-start justify-between mb-3">
+                    <h3 className="text-2xl font-bold text-[#0f172a]">{proj.title}</h3>
+                    <span className="text-[10px] text-slate-400 mt-1.5 shrink-0 font-mono">{proj.period}</span>
                   </div>
-                  <p className="text-[#0e7490]/70 text-sm mb-4">{proj.subtitle}</p>
+                  <p className="text-[#2563eb]/70 text-sm font-medium mb-4">{proj.subtitle}</p>
 
                   <div className="flex flex-wrap gap-2 mb-4">
-                    <span className="tag">{proj.role}</span>
+                    <span className="tag-ocean">{proj.role}</span>
                     {proj.award && (
-                      <span className="bg-sky-50 text-[#0e7490] text-xs px-2.5 py-0.5 rounded-full border border-sky-100">
+                      <span className="bg-amber-50 text-amber-600 text-xs px-2.5 py-0.5 rounded-full border border-amber-200 font-medium">
                         🏆 {proj.award}
                       </span>
                     )}
                   </div>
 
                   <div className="flex flex-wrap gap-1.5 mb-4">
-                    {proj.techs.map((t) => (
-                      <span key={t} className="tag tag-plain text-xs">{t}</span>
-                    ))}
+                    {proj.techs.map((t) => <span key={t} className="tag-muted tag-ocean text-xs">{t}</span>)}
                   </div>
 
                   <ul className="space-y-2 text-sm text-slate-500 leading-relaxed flex-1">
                     {proj.details.map((d, j) => (
                       <li key={j} className="flex items-start gap-2">
-                        <span className="mt-1.5 w-1 h-1 rounded-full bg-[#0e7490]/40 shrink-0" />
-                        {d}
+                        <span className="mt-1.5 w-1 h-1 rounded-full bg-[#2563eb]/40 shrink-0" />{d}
                       </li>
                     ))}
                   </ul>

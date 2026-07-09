@@ -29,18 +29,18 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/90 backdrop-blur-xl shadow-sm border-b border-sky-50 py-3"
+          ? "bg-white/80 backdrop-blur-xl shadow-sm border-b border-slate-100 py-3"
           : "bg-transparent py-5"
       }`}
     >
-      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         <motion.a
           href="#hero"
-          className="text-lg font-bold tracking-tight text-[#0c2d48]"
+          className="text-lg font-bold tracking-tight text-[#0f172a]"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
         >
-          Chen Xi<span className="text-[#0e7490]">.</span>
+          Chen Xi<span className="text-[#2563eb]">.</span>
         </motion.a>
 
         <div className="hidden md:flex items-center gap-1">
@@ -48,7 +48,7 @@ export default function Navbar() {
             <motion.a
               key={link.href}
               href={link.href}
-              className="px-3 py-2 text-sm text-slate-500 hover:text-[#0e7490] transition-colors duration-200 rounded-lg hover:bg-sky-50"
+              className="px-3 py-2 text-sm text-slate-500 hover:text-[#2563eb] transition-colors duration-200 rounded-lg hover:bg-slate-50 font-medium"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.04 }}
@@ -59,7 +59,7 @@ export default function Navbar() {
         </div>
 
         <button
-          className="md:hidden text-slate-500 hover:text-[#0e7490] transition-colors"
+          className="md:hidden text-slate-500 hover:text-[#2563eb] transition-colors"
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           {mobileOpen ? <HiX size={24} /> : <HiMenuAlt3 size={24} />}
@@ -69,7 +69,7 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            className="md:hidden bg-white border-b border-sky-50"
+            className="md:hidden bg-white border-b border-slate-100 shadow-sm"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
@@ -80,7 +80,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="py-2 text-slate-500 hover:text-[#0e7490] transition-colors"
+                  className="py-2 text-slate-500 hover:text-[#2563eb] transition-colors font-medium"
                 >
                   {link.label}
                 </a>
