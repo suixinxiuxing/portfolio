@@ -1,91 +1,37 @@
 "use client";
-
 import { motion } from "framer-motion";
 import SectionHeading from "./SectionHeading";
-import WaveDivider from "./WaveDivider";
 
-const skillGroups = [
-  {
-    group: "工程仿真",
-    skills: [
-      { name: "STAR-CCM+", level: 90 },
-      { name: "CFD 数值模拟", level: 85 },
-      { name: "AutoCAD", level: 80 },
-      { name: "Autodesk Revit", level: 70 },
-      { name: "ArcGIS", level: 65 },
-    ],
-  },
-  {
-    group: "编程与数据",
-    skills: [
-      { name: "Python", level: 85 },
-      { name: "MATLAB", level: 80 },
-      { name: "SQL", level: 75 },
-      { name: "数据分析", level: 85 },
-    ],
-  },
-  {
-    group: "语言能力",
-    skills: [
-      { name: "英语 (CET-6)", level: 80 },
-      { name: "学术英语写作", level: 82 },
-      { name: "国际会议交流", level: 75 },
-    ],
-  },
-  {
-    group: "通用技能",
-    skills: [
-      { name: "技术文档撰写", level: 88 },
-      { name: "项目管理", level: 78 },
-      { name: "新媒体运营", level: 75 },
-      { name: "MS Office", level: 90 },
-    ],
-  },
+const groups = [
+  { name: "Simulation", skills: [{n:"STAR-CCM+",l:90},{n:"CFD Modeling",l:85},{n:"AutoCAD",l:80},{n:"Revit",l:70},{n:"ArcGIS",l:65}] },
+  { name: "Programming", skills: [{n:"Python",l:85},{n:"MATLAB",l:80},{n:"SQL",l:75},{n:"Data Analysis",l:85}] },
+  { name: "Languages", skills: [{n:"English (CET-6)",l:80},{n:"Academic Writing",l:82},{n:"Conference Present.",l:75}] },
+  { name: "General", skills: [{n:"Technical Writing",l:88},{n:"Project Mgmt",l:78},{n:"Social Media",l:75},{n:"MS Office",l:90}] },
 ];
-
-const techScroll = ["STAR-CCM+", "CFD 数值模拟", "Python", "MATLAB", "AutoCAD", "SQL", "英语 CET-6", "数据分析", "Revit", "ArcGIS", "MS Office"];
+const scroll = ["STAR-CCM+","CFD Modeling","Python","MATLAB","AutoCAD","SQL","English CET-6","Data Analysis","Revit","ArcGIS","MS Office"];
 
 export default function Skills() {
   return (
-    <>
-      <WaveDivider flip color="white" />
-      <section id="skills" className="py-32 px-6 bg-[#f8fafc]">
-        <div className="max-w-7xl mx-auto">
-          <SectionHeading label="技能" title="专业能力" />
-
-          {/* Marquee */}
-          <div className="max-w-3xl mx-auto mb-16 overflow-hidden rounded-2xl bg-white border border-slate-100 py-5 shadow-sm">
-            <div className="flex gap-8 animate-marquee whitespace-nowrap">
-              {[...techScroll, ...techScroll].map((tech, i) => (
-                <span key={i} className="text-sm font-semibold text-[#2563eb] bg-[#eff6ff] px-5 py-2.5 rounded-full border border-blue-100 shrink-0">
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
-            {skillGroups.map((group, gi) => (
-              <motion.div key={group.group} className="card-premium p-7" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: gi * 0.08 }}>
-                <h3 className="text-sm font-bold text-[#0f172a] mb-6 uppercase tracking-wider">{group.group}</h3>
-                <div className="space-y-4">
-                  {group.skills.map((skill, si) => (
-                    <div key={skill.name}>
-                      <div className="flex justify-between text-xs mb-1.5">
-                        <span className="text-slate-500 font-medium">{skill.name}</span>
-                        <span className="text-slate-300 font-mono">{skill.level}%</span>
-                      </div>
-                      <div className="progress-track">
-                        <motion.div className="progress-fill" initial={{ width: 0 }} whileInView={{ width: `${skill.level}%` }} viewport={{ once: true }} transition={{ delay: gi * 0.1 + si * 0.08, duration: 0.6, ease: "easeOut" }} />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
+    <section id="skills" className="py-32 px-6 bg-[#0f0f0f]">
+      <div className="max-w-7xl mx-auto">
+        <SectionHeading label="Skills" title="Technical Expertise" />
+        <div className="max-w-3xl mx-auto mb-16 overflow-hidden rounded-2xl glass-heavy py-5">
+          <div className="flex gap-8 animate-marquee whitespace-nowrap">
+            {[...scroll,...scroll].map((t,i) => <span key={i} className="text-sm font-semibold text-[#a78bfa] bg-[#8b5cf6]/[0.06] px-5 py-2.5 rounded-full border border-[#8b5cf6]/10 shrink-0">{t}</span>)}
           </div>
         </div>
-      </section>
-    </>
+        <motion.div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ visible: { transition: { staggerChildren: 0.08 } } }}>
+          {groups.map(g => (
+            <motion.div key={g.name} className="card-framer p-7" variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0 } }}>
+              <h3 className="text-xs font-bold text-white uppercase tracking-wider mb-6">{g.name}</h3>
+              <div className="space-y-4">{g.skills.map(s => (
+                <div key={s.n}><div className="flex justify-between text-[10px] mb-1.5"><span className="text-white/35 font-medium">{s.n}</span><span className="text-white/15 font-mono">{s.l}%</span></div>
+                <div className="progress-track"><motion.div className="progress-fill" initial={{ width: 0 }} whileInView={{ width: `${s.l}%` }} viewport={{ once: true }} transition={{ duration: 0.6, ease: "easeOut" }}/></div></div>
+              ))}</div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
   );
 }
