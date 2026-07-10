@@ -24,7 +24,7 @@ export default function Contact() {
             {info.map(i => (
               <div key={i.label} className="flex items-center gap-4">
                 <div className="w-11 h-11 rounded-2xl bg-purple-50 border border-purple-100 flex items-center justify-center text-[#7c3aed] shrink-0">{i.icon}</div>
-                <div><p className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">{i.label}</p>
+                <div><p className="text-xs text-gray-400 uppercase tracking-wider font-semibold">{i.label}</p>
                 {i.href ? <a href={i.href} className="text-base text-gray-600 hover:text-[#7c3aed] transition-colors font-medium">{i.value}</a> : <p className="text-base text-gray-600 font-medium">{i.value}</p>}</div>
               </div>
             ))}

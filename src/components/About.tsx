@@ -23,8 +23,8 @@ export default function About() {
             {stats.map((s, i) => (
               <motion.div key={s.l} className="card-framer p-7 text-center" initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}>
                 <div className="text-[2.5rem] font-black text-gray-900 tracking-tight">{s.v}</div>
-                <div className="text-[10px] text-gray-400 font-semibold uppercase tracking-wider mt-2">{s.l}</div>
-                <div className="text-[10px] text-gray-300 mt-1">{s.s}</div>
+                <div className="text-xs text-gray-400 font-semibold uppercase tracking-wider mt-2">{s.l}</div>
+                <div className="text-xs text-gray-300 mt-1">{s.s}</div>
               </motion.div>
             ))}
           </motion.div>

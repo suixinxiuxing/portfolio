@@ -159,11 +159,9 @@ export default function ScrollMorphHero({ lang, heroSchool, heroSubtitle, heroCt
     return () => container.removeEventListener("mousemove", handleMouseMove);
   }, [mouseX]);
 
-  // Intro sequence
+  // Start directly in circle phase
   useEffect(() => {
-    const t1 = setTimeout(() => setIntroPhase("line"), 500);
-    const t2 = setTimeout(() => setIntroPhase("circle"), 2500);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
+    setIntroPhase("circle");
   }, []);
 
   // Scatter positions
@@ -208,7 +206,7 @@ export default function ScrollMorphHero({ lang, heroSchool, heroSubtitle, heroCt
             initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
             animate={introPhase === "circle" && morphValue < 0.5 ? { opacity: 1 - morphValue * 2, y: 0, filter: "blur(0px)" } : { opacity: 0, filter: "blur(10px)" }}
             transition={{ duration: 1 }}
-            className="text-2xl font-black tracking-tight text-gray-800 md:text-5xl"
+            className="text-3xl font-black tracking-tight text-gray-800 md:text-6xl"
           >
             陈<span className="text-framer">希</span>
           </motion.h1>
@@ -216,7 +214,7 @@ export default function ScrollMorphHero({ lang, heroSchool, heroSubtitle, heroCt
             initial={{ opacity: 0 }}
             animate={introPhase === "circle" && morphValue < 0.5 ? { opacity: 0.5 - morphValue } : { opacity: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="mt-4 text-xs font-bold tracking-[0.2em] text-gray-400 uppercase"
+            className="mt-4 text-sm font-bold tracking-[0.2em] text-gray-400 uppercase"
           >
             SCROLL TO EXPLORE
           </motion.p>
@@ -224,17 +222,17 @@ export default function ScrollMorphHero({ lang, heroSchool, heroSubtitle, heroCt
 
         {/* Arc Active Content - Fades in */}
         <motion.div style={{ opacity: contentOpacity, y: contentY }} className="absolute top-[12%] z-10 flex flex-col items-center justify-center text-center pointer-events-none px-4">
-          <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-4 border-white shadow-xl mx-auto mb-6">
+          <div className="w-32 h-32 sm:w-36 sm:h-36 rounded-full overflow-hidden border-4 border-white shadow-xl mx-auto mb-6">
             <img src={`${basePath}/avatar.jpg`} alt="陈希" className="w-full h-full object-cover" />
           </div>
-          <p className="text-[10px] font-semibold tracking-[0.25em] uppercase text-gray-400 mb-4">{heroSchool}</p>
-          <h2 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight mb-3">
+          <p className="text-xs font-semibold tracking-[0.25em] uppercase text-gray-400 mb-4">{heroSchool}</p>
+          <h2 className="text-4xl md:text-6xl font-black text-gray-900 tracking-tight mb-3">
             陈<span className="text-framer">希</span>
           </h2>
-          <p className="text-sm md:text-base text-gray-500 max-w-lg leading-relaxed">{heroSubtitle}</p>
+          <p className="text-base md:text-lg text-gray-500 max-w-lg leading-relaxed">{heroSubtitle}</p>
           <div className="flex gap-3 mt-6 pointer-events-auto">
-            <a href="#projects" className="px-6 py-3 rounded-full bg-gray-900 text-white hover:bg-gray-800 transition-colors font-semibold text-sm">{heroCta1} →</a>
-            <a href="#contact" className="px-6 py-3 rounded-full border border-gray-200 text-gray-500 hover:text-gray-900 hover:border-gray-400 transition-colors text-sm font-medium">{heroCta2}</a>
+            <a href="#projects" className="px-8 py-4 rounded-full bg-gray-900 text-white hover:bg-gray-800 transition-colors font-semibold text-base">{heroCta1} →</a>
+            <a href="#contact" className="px-8 py-4 rounded-full border border-gray-200 text-gray-500 hover:text-gray-900 hover:border-gray-400 transition-colors text-base font-medium">{heroCta2}</a>
           </div>
         </motion.div>
 
