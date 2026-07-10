@@ -26,9 +26,9 @@ export default function Navbar() {
         </motion.a>
         <div className="hidden md:flex items-center gap-1">
           {links.map((l, i) => (
-            <motion.a key={l.href} href={l.href} className="px-3 py-2 text-[10px]font-medium text-gray-500 hover:text-[#8b5cf6] transition-colors rounded-lg hover:bg-gray-50 uppercase tracking-wider" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.03 }}>{l.label}</motion.a>
+            <motion.a key={l.href} href={l.href} className="px-3 py-2 text-sm font-medium text-gray-500 hover:text-[#8b5cf6] transition-colors rounded-lg hover:bg-gray-50 uppercase tracking-wider" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.03 }}>{l.label}</motion.a>
           ))}
-          <button onClick={toggleLang} className="ml-2 px-3 py-2 text-[10px]font-medium text-gray-400 hover:text-[#8b5cf6] transition-colors rounded-lg hover:bg-gray-50 uppercase tracking-wider border border-gray-200">{lang === "zh" ? "EN" : "中"}</button>
+          <button onClick={toggleLang} className="ml-2 px-3 py-2 text-sm font-medium text-gray-400 hover:text-[#8b5cf6] transition-colors rounded-lg hover:bg-gray-50 uppercase tracking-wider border border-gray-200">{lang === "zh" ? "EN" : "中"}</button>
         </div>
         <div className="md:hidden flex items-center gap-2">
           <button onClick={toggleLang} className="px-2 py-1 text-[10px]font-medium text-gray-400 hover:text-[#8b5cf6] transition-colors rounded border border-gray-200">{lang === "zh" ? "EN" : "中"}</button>
