@@ -65,7 +65,7 @@ const SECTION_IMAGES = [
 ];
 
 const TOTAL_IMAGES = SECTION_IMAGES.length;
-const MAX_SCROLL = 3000;
+const MAX_SCROLL = 1200;
 
 const lerp = (start: number, end: number, t: number) => start * (1 - t) + end * t;
 
@@ -131,11 +131,11 @@ export default function ScrollMorphHero({ lang, heroSchool, heroSubtitle, heroCt
   }, [virtualScroll]);
 
   // Morph: circle → arc (scroll 0→600)
-  const morphProgress = useTransform(virtualScroll, [0, 600], [0, 1]);
+  const morphProgress = useTransform(virtualScroll, [0, 300], [0, 1]);
   const smoothMorph = useSpring(morphProgress, { stiffness: 40, damping: 20 });
 
   // Scroll rotation (scroll 600→3000)
-  const scrollRotate = useTransform(virtualScroll, [600, 3000], [0, 360]);
+  const scrollRotate = useTransform(virtualScroll, [300, 1200], [0, 360]);
   const smoothScrollRotate = useSpring(scrollRotate, { stiffness: 40, damping: 20 });
 
   // Mouse parallax

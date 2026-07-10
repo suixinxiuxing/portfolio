@@ -19,11 +19,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="zh-CN" className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased scroll-smooth`}>
-      <body className="min-h-full flex flex-col bg-[#0a0a0a] text-[#fafafa]">
+      <body className="min-h-full flex flex-col bg-[#fafafa] text-[#1a1a2e]">
         <Providers>
-          <div className="bg-grain" />
           <Navbar />
-          <main className="flex-1 relative z-10">{children}</main>
+          <main className="flex-1">{children}</main>
           <Footer />
         </Providers>
       </body>
