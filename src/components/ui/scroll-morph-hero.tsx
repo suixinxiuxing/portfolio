@@ -137,11 +137,11 @@ export default function ScrollMorphHero({ lang, heroSchool, heroSubtitle, heroCt
 
   // Morph: circle → arc (scroll 0→600)
   const morphProgress = useTransform(virtualScroll, [0, 300], [0, 1]);
-  const smoothMorph = useSpring(morphProgress, { stiffness: 40, damping: 20 });
+  const smoothMorph = useSpring(morphProgress, { stiffness: 120, damping: 12 });
 
   // Scroll rotation (scroll 600→3000)
   const scrollRotate = useTransform(virtualScroll, [300, 1200], [0, 360]);
-  const smoothScrollRotate = useSpring(scrollRotate, { stiffness: 40, damping: 20 });
+  const smoothScrollRotate = useSpring(scrollRotate, { stiffness: 120, damping: 12 });
 
   // Mouse parallax
   const mouseX = useMotionValue(0);
@@ -222,7 +222,7 @@ export default function ScrollMorphHero({ lang, heroSchool, heroSubtitle, heroCt
 
         {/* Arc Active Content - Fades in */}
         <motion.div style={{ opacity: contentOpacity, y: contentY }} className="absolute top-[12%] z-10 flex flex-col items-center justify-center text-center pointer-events-none px-4">
-          <div className="w-32 h-32 sm:w-36 sm:h-36 rounded-full overflow-hidden border-4 border-white shadow-xl mx-auto mb-6">
+          <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-white shadow-xl mx-auto mb-6">
             <img src={`${basePath}/avatar.jpg`} alt="陈希" className="w-full h-full object-cover" />
           </div>
           <p className="text-xs font-semibold tracking-[0.25em] uppercase text-gray-400 mb-4">{heroSchool}</p>
@@ -231,8 +231,8 @@ export default function ScrollMorphHero({ lang, heroSchool, heroSubtitle, heroCt
           </h2>
           <p className="text-base md:text-lg text-gray-500 max-w-lg leading-relaxed">{heroSubtitle}</p>
           <div className="flex gap-3 mt-6 pointer-events-auto">
-            <a href="#projects" className="px-8 py-4 rounded-full bg-gray-900 text-white hover:bg-gray-800 transition-colors font-semibold text-base">{heroCta1} →</a>
-            <a href="#contact" className="px-8 py-4 rounded-full border border-gray-200 text-gray-500 hover:text-gray-900 hover:border-gray-400 transition-colors text-base font-medium">{heroCta2}</a>
+            <a href="#projects" className="px-10 py-5 rounded-full bg-gray-900 text-white hover:bg-gray-800 transition-colors font-semibold text-lg">{heroCta1} →</a>
+            <a href="#contact" className="px-10 py-5 rounded-full border border-gray-200 text-gray-500 hover:text-gray-900 hover:border-gray-400 transition-colors text-lg font-medium">{heroCta2}</a>
           </div>
         </motion.div>
 

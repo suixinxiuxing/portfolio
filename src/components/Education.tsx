@@ -23,13 +23,13 @@ export default function Education() {
                 <div className="absolute left-[14px] top-2 w-[11px] h-[11px] rounded-full bg-[#8b5cf6] border-[2px] border-[#fafafa] ring-1 ring-[#8b5cf6]/20 hidden sm:block" />
                 <div className="card-framer p-7 sm:p-8">
                   <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
-                    <div><h3 className="text-xl font-bold text-gray-900">{e.school}</h3><p className="text-sm text-[#7c3aed] font-medium">{e.degree}</p></div>
+                    <div><h3 className="text-base font-bold text-gray-900">{e.school}</h3><p className="text-[10px]text-[#7c3aed] font-medium">{e.degree}</p></div>
                     {e.current && <span className="tag-framer">{tt("education.current")}</span>}
                   </div>
-                  <div className="flex flex-wrap gap-4 text-xs text-gray-400 mb-4"><span className="flex items-center gap-1"><FiClock size={10}/> {e.period}</span><span className="flex items-center gap-1"><FiMapPin size={10}/> {e.location}</span></div>
+                  <div className="flex flex-wrap gap-4 text-[10px]text-gray-400 mb-4"><span className="flex items-center gap-1"><FiClock size={10}/> {e.period}</span><span className="flex items-center gap-1"><FiMapPin size={10}/> {e.location}</span></div>
                   <div className="grid sm:grid-cols-2 gap-3 mb-4">
-                    <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-xl font-bold text-gray-900">{e.gpa}</div><div className="text-[10px] text-gray-400 uppercase tracking-wider mt-0.5">{tt("education.gpaLabel")}</div></div>
-                    <div className="bg-purple-50 rounded-xl p-3 text-center"><div className="text-lg font-bold text-[#7c3aed]">{e.rank}</div><div className="text-[10px] text-gray-400 uppercase tracking-wider mt-0.5">{tt("education.rankLabel")}</div></div>
+                    <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-base font-bold text-gray-900">{e.gpa}</div><div className="text-[10px] text-gray-400 uppercase tracking-wider mt-0.5">{tt("education.gpaLabel")}</div></div>
+                    <div className="bg-purple-50 rounded-xl p-3 text-center"><div className="text-base font-bold text-[#7c3aed]">{e.rank}</div><div className="text-[10px] text-gray-400 uppercase tracking-wider mt-0.5">{tt("education.rankLabel")}</div></div>
                   </div>
                   <div className="flex flex-wrap gap-1.5">{e.awards.map(a => <span key={a} className="tag-framer tag-framer-muted text-xs">{a}</span>)}</div>
                 </div>

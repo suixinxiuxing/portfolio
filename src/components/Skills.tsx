@@ -19,15 +19,15 @@ export default function Skills() {
         <SectionHeading label={tt("skills.label")} title={tt("skills.title")} />
         <div className="max-w-3xl mx-auto mb-16 overflow-hidden rounded-2xl bg-white border border-gray-100 py-5">
           <div className="flex gap-8 animate-marquee whitespace-nowrap">
-            {[...scroll,...scroll].map((t,i) => <span key={i} className="text-sm font-semibold text-[#7c3aed] bg-purple-50 px-5 py-2.5 rounded-full border border-purple-100 shrink-0">{t}</span>)}
+            {[...scroll,...scroll].map((t,i) => <span key={i} className="text-[10px]font-semibold text-[#7c3aed] bg-purple-50 px-5 py-2.5 rounded-full border border-purple-100 shrink-0">{t}</span>)}
           </div>
         </div>
         <motion.div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ visible: { transition: { staggerChildren: 0.08 } } }}>
           {groups.map(g => (
             <motion.div key={g.name} className="card-framer p-7" variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0 } }}>
-              <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-6">{g.name}</h3>
+              <h3 className="text-[10px]font-bold text-gray-900 uppercase tracking-wider mb-6">{g.name}</h3>
               <div className="space-y-4">{g.skills.map(s => (
-                <div key={s.n}><div className="flex justify-between text-xs mb-1.5"><span className="text-gray-500 font-medium">{s.n}</span><span className="text-gray-300 font-mono">{s.l}%</span></div>
+                <div key={s.n}><div className="flex justify-between text-[10px]mb-1.5"><span className="text-gray-500 font-medium">{s.n}</span><span className="text-gray-300 font-mono">{s.l}%</span></div>
                   <div className="progress-track"><motion.div className="progress-fill" initial={{ width: 0 }} whileInView={{ width: `${s.l}%` }} viewport={{ once: true }} transition={{ duration: 0.6, ease: "easeOut" }}/></div>
                 </div>
               ))}</div>

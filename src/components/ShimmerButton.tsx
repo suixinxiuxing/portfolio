@@ -16,7 +16,7 @@ export default function ShimmerButton({
   onClick,
   className = "",
 }: ShimmerButtonProps) {
-  const base = `relative inline-flex items-center justify-center overflow-hidden rounded-full px-7 py-3 font-medium text-sm transition-all duration-300 ${className}`;
+  const base = `relative inline-flex items-center justify-center overflow-hidden rounded-full px-7 py-3 font-medium text-[10px]transition-all duration-300 ${className}`;
 
   const content = (
     <motion.span

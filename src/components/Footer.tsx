@@ -9,10 +9,10 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="text-center sm:text-left">
-            <div className="text-xl font-bold text-gray-900">Xi<span className="text-[#8b5cf6]"> Chen</span></div>
-            <p className="text-xs text-gray-400 mt-0.5">{tt("footer.tagline")}</p>
+            <div className="text-base font-bold text-gray-900">Xi<span className="text-[#8b5cf6]"> Chen</span></div>
+            <p className="text-[10px]text-gray-400 mt-0.5">{tt("footer.tagline")}</p>
           </div>
-          <div className="flex items-center gap-6 text-xs text-gray-400 font-medium uppercase tracking-wider">
+          <div className="flex items-center gap-6 text-[10px]text-gray-400 font-medium uppercase tracking-wider">
             <a href="#hero" className="hover:text-gray-700 transition-colors">Home</a>
             <a href="#about" className="hover:text-gray-700 transition-colors">About</a>
             <a href="#projects" className="hover:text-gray-700 transition-colors">Projects</a>
