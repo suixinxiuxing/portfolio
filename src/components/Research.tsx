@@ -27,7 +27,7 @@ export default function Research() {
             <div className="space-y-3">{patents.map((p,i) => (
               <motion.div key={p.id} className="card-framer p-5" initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i*0.08 }}>
                 <span className="tag-framer text-[10px] mb-2 inline-block">{p.type}</span>
-                <p className="text-sm text-gray-600 leading-relaxed font-medium">{p.title}</p>
+                <p className="text-base text-gray-600 leading-relaxed font-medium">{p.title}</p>
                 <p className="text-[10px] text-gray-400 font-mono mt-1.5">{p.id}</p>
               </motion.div>
             ))}</div>
@@ -37,7 +37,7 @@ export default function Research() {
             <div className="space-y-3">{papers.map((p,i) => (
               <motion.div key={p.journal+i} className={`card-framer p-5 ${p.hl ? "border-l-2 border-l-[#8b5cf6]" : ""}`} initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i*0.08 }}>
                 <span className={`text-[10px] font-medium mb-2 inline-block px-2 py-0.5 rounded-full ${p.hl ? "tag-framer" : "tag-framer tag-framer-muted"}`}>{p.year}</span>
-                <p className="text-sm text-gray-500 leading-relaxed">{p.journal}</p>
+                <p className="text-base text-gray-500 leading-relaxed">{p.journal}</p>
                 <div className="flex gap-3 text-[10px] text-gray-400 font-mono mt-1.5">{p.vol && <span>{p.vol}</span>}<span>{p.role}</span></div>
               </motion.div>
             ))}</div>

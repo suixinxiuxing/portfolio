@@ -22,7 +22,7 @@ export default function Navbar() {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/90 backdrop-blur-xl shadow-sm border-b border-gray-100 py-3" : "bg-transparent py-5"}`}>
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         <motion.a href="#hero" className="text-lg font-bold tracking-tight text-gray-900" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
-          CX<span className="text-[#8b5cf6]">.</span>
+          Xi<span className="text-[#8b5cf6]"> Chen</span>
         </motion.a>
         <div className="hidden md:flex items-center gap-1">
           {links.map((l, i) => (

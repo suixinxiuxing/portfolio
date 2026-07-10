@@ -20,7 +20,7 @@ export default function Projects() {
               <p className="text-[#7c3aed]/70 text-sm font-medium mb-4">{p.sub}</p>
               <div className="flex flex-wrap gap-2 mb-4"><span className="tag-framer">{p.role}</span>{p.award && <span className="tag-framer tag-framer-muted">🏆 {p.award}</span>}</div>
               <div className="flex flex-wrap gap-1.5 mb-4">{p.techs.map(t => <span key={t} className="tag-framer tag-framer-muted text-[10px]">{t}</span>)}</div>
-              <ul className="space-y-2 text-sm text-gray-500 leading-relaxed flex-1">{p.details.map((d,j) => <li key={j} className="flex items-start gap-2"><span className="mt-1.5 w-1 h-1 rounded-full bg-[#8b5cf6]/50 shrink-0"/>{d}</li>)}</ul>
+              <ul className="space-y-2 text-base text-gray-500 leading-relaxed flex-1">{p.details.map((d,j) => <li key={j} className="flex items-start gap-2"><span className="mt-1.5 w-1 h-1 rounded-full bg-[#8b5cf6]/50 shrink-0"/>{d}</li>)}</ul>
             </motion.div>
           ))}
         </motion.div>

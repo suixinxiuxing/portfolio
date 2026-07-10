@@ -25,15 +25,15 @@ export default function Contact() {
               <div key={i.label} className="flex items-center gap-4">
                 <div className="w-11 h-11 rounded-2xl bg-purple-50 border border-purple-100 flex items-center justify-center text-[#7c3aed] shrink-0">{i.icon}</div>
                 <div><p className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">{i.label}</p>
-                {i.href ? <a href={i.href} className="text-sm text-gray-600 hover:text-[#7c3aed] transition-colors font-medium">{i.value}</a> : <p className="text-sm text-gray-600 font-medium">{i.value}</p>}</div>
+                {i.href ? <a href={i.href} className="text-base text-gray-600 hover:text-[#7c3aed] transition-colors font-medium">{i.value}</a> : <p className="text-base text-gray-600 font-medium">{i.value}</p>}</div>
               </div>
             ))}
           </motion.div>
           <motion.form onSubmit={submit} className="space-y-4" initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-            <input type="text" placeholder={tt("contact.namePlaceholder")} required className="w-full px-5 py-3.5 rounded-2xl bg-white border border-gray-200 text-sm text-gray-700 placeholder:text-gray-300 focus:outline-none focus:border-[#8b5cf6]/40 transition-colors" />
-            <input type="email" placeholder={tt("contact.emailPlaceholder")} required className="w-full px-5 py-3.5 rounded-2xl bg-white border border-gray-200 text-sm text-gray-700 placeholder:text-gray-300 focus:outline-none focus:border-[#8b5cf6]/40 transition-colors" />
-            <textarea placeholder={tt("contact.msgPlaceholder")} rows={4} required className="w-full px-5 py-3.5 rounded-2xl bg-white border border-gray-200 text-sm text-gray-700 placeholder:text-gray-300 focus:outline-none focus:border-[#8b5cf6]/40 transition-colors resize-none" />
-            <button type="submit" className="w-full px-6 py-3.5 rounded-full bg-gray-900 text-white hover:bg-black transition-colors font-semibold text-sm flex items-center justify-center gap-2">{ok ? tt("contact.sent") : <><FiSend size={14} /> {tt("contact.send")}</>}</button>
+            <input type="text" placeholder={tt("contact.namePlaceholder")} required className="w-full px-5 py-3.5 rounded-2xl bg-white border border-gray-200 text-base text-gray-700 placeholder:text-gray-300 focus:outline-none focus:border-[#8b5cf6]/40 transition-colors" />
+            <input type="email" placeholder={tt("contact.emailPlaceholder")} required className="w-full px-5 py-3.5 rounded-2xl bg-white border border-gray-200 text-base text-gray-700 placeholder:text-gray-300 focus:outline-none focus:border-[#8b5cf6]/40 transition-colors" />
+            <textarea placeholder={tt("contact.msgPlaceholder")} rows={4} required className="w-full px-5 py-3.5 rounded-2xl bg-white border border-gray-200 text-base text-gray-700 placeholder:text-gray-300 focus:outline-none focus:border-[#8b5cf6]/40 transition-colors resize-none" />
+            <button type="submit" className="w-full px-6 py-3.5 rounded-full bg-gray-900 text-white hover:bg-black transition-colors font-semibold text-base flex items-center justify-center gap-2">{ok ? tt("contact.sent") : <><FiSend size={14} /> {tt("contact.send")}</>}</button>
           </motion.form>
         </div>
       </div>

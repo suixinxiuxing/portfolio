@@ -29,7 +29,7 @@ export default function Experience() {
               <h3 className="text-lg font-bold text-gray-900 mb-1">{e.title}</h3>
               <p className="text-sm text-[#7c3aed] font-medium mb-3">{e.org}</p>
               <div className="flex gap-4 text-[10px] text-gray-400 mb-5"><span className="flex items-center gap-1"><FiClock size={10}/>{e.period}</span><span className="flex items-center gap-1"><FiMapPin size={10}/>{e.loc}</span></div>
-              <ul className="space-y-3 text-sm text-gray-500 leading-relaxed">{e.items.map((d,j) => <li key={j} className="flex items-start gap-3"><span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#8b5cf6]/50 shrink-0"/>{d}</li>)}</ul>
+              <ul className="space-y-3 text-base text-gray-500 leading-relaxed">{e.items.map((d,j) => <li key={j} className="flex items-start gap-3"><span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#8b5cf6]/50 shrink-0"/>{d}</li>)}</ul>
             </motion.div>
           ))}
         </div>
@@ -45,7 +45,7 @@ export default function Experience() {
                 <h3 className="text-base font-bold text-gray-900 mb-1">{e.title}</h3>
                 <p className="text-xs text-gray-400 mb-3">{e.org}</p>
                 <div className="flex gap-3 text-[10px] text-gray-400 mb-4"><span className="flex items-center gap-1"><FiClock size={10}/>{e.period}</span><span className="flex items-center gap-1"><FiMapPin size={10}/>{e.loc}</span></div>
-                <ul className="space-y-2 text-sm text-gray-500 leading-relaxed flex-1">{e.items.map((d,j) => <li key={j} className="flex items-start gap-2"><span className="mt-1.5 w-1 h-1 rounded-full bg-[#3b82f6]/50 shrink-0"/>{d}</li>)}</ul>
+                <ul className="space-y-2 text-base text-gray-500 leading-relaxed flex-1">{e.items.map((d,j) => <li key={j} className="flex items-start gap-2"><span className="mt-1.5 w-1 h-1 rounded-full bg-[#3b82f6]/50 shrink-0"/>{d}</li>)}</ul>
               </motion.div>
             ))}
           </motion.div>
