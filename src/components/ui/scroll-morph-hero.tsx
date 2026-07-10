@@ -106,7 +106,7 @@ export default function ScrollMorphHero({ lang, heroSchool, heroSubtitle, heroCt
     if (!container) return;
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
-      const newScroll = Math.min(Math.max(scrollRef.current + e.deltaY, 0), MAX_SCROLL);
+      const newScroll = Math.min(Math.max(scrollRef.current + e.deltaY * 0.8, 0), MAX_SCROLL);
       scrollRef.current = newScroll;
       virtualScroll.set(newScroll);
     };
@@ -191,7 +191,7 @@ export default function ScrollMorphHero({ lang, heroSchool, heroSubtitle, heroCt
   };
 
   return (
-    <div ref={containerRef} className="relative w-full h-screen bg-[#0a0a0a] overflow-hidden">
+    <div ref={containerRef} className="relative w-full h-screen bg-[#FAFAFA] overflow-hidden">
       <div className="flex h-full w-full flex-col items-center justify-center" style={{ perspective: "1000px" }}>
 
         {/* Intro Text - Fades out */}
@@ -200,7 +200,7 @@ export default function ScrollMorphHero({ lang, heroSchool, heroSubtitle, heroCt
             initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
             animate={introPhase === "circle" && morphValue < 0.5 ? { opacity: 1 - morphValue * 2, y: 0, filter: "blur(0px)" } : { opacity: 0, filter: "blur(10px)" }}
             transition={{ duration: 1 }}
-            className="text-2xl font-black tracking-tight text-white md:text-5xl"
+            className="text-2xl font-black tracking-tight text-gray-800 md:text-5xl"
           >
             陈<span className="text-framer">希</span>
           </motion.h1>
@@ -208,7 +208,7 @@ export default function ScrollMorphHero({ lang, heroSchool, heroSubtitle, heroCt
             initial={{ opacity: 0 }}
             animate={introPhase === "circle" && morphValue < 0.5 ? { opacity: 0.5 - morphValue } : { opacity: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="mt-4 text-xs font-bold tracking-[0.2em] text-[#a78bfa] uppercase"
+            className="mt-4 text-xs font-bold tracking-[0.2em] text-gray-400 uppercase"
           >
             SCROLL TO EXPLORE
           </motion.p>
@@ -216,14 +216,14 @@ export default function ScrollMorphHero({ lang, heroSchool, heroSubtitle, heroCt
 
         {/* Arc Active Content - Fades in */}
         <motion.div style={{ opacity: contentOpacity, y: contentY }} className="absolute top-[12%] z-10 flex flex-col items-center justify-center text-center pointer-events-none px-4">
-          <p className="text-[10px] font-semibold tracking-[0.25em] uppercase text-[#a78bfa] mb-4">{heroSchool}</p>
-          <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight mb-3">
+          <p className="text-[10px] font-semibold tracking-[0.25em] uppercase text-gray-400 mb-4">{heroSchool}</p>
+          <h2 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight mb-3">
             陈<span className="text-framer">希</span>
           </h2>
-          <p className="text-sm md:text-base text-white/40 max-w-lg leading-relaxed">{heroSubtitle}</p>
+          <p className="text-sm md:text-base text-gray-500 max-w-lg leading-relaxed">{heroSubtitle}</p>
           <div className="flex gap-3 mt-6 pointer-events-auto">
-            <a href="#projects" className="btn-apple btn-apple-primary text-sm">{heroCta1} →</a>
-            <a href="#contact" className="btn-apple btn-apple-ghost text-sm">{heroCta2}</a>
+            <a href="#projects" className="px-6 py-3 rounded-full bg-gray-900 text-white hover:bg-gray-800 transition-colors font-semibold text-sm">{heroCta1} →</a>
+            <a href="#contact" className="px-6 py-3 rounded-full border border-gray-200 text-gray-500 hover:text-gray-900 hover:border-gray-400 transition-colors text-sm font-medium">{heroCta2}</a>
           </div>
         </motion.div>
 
