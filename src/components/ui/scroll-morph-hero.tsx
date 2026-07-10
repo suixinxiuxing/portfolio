@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { motion, useTransform, useSpring, useMotionValue } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 // --- Types ---
 export type AnimationPhase = "scatter" | "line" | "circle" | "bottom-strip";
@@ -190,6 +191,9 @@ export default function ScrollMorphHero({ lang, heroSchool, heroSubtitle, heroCt
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const pathname = usePathname();
+  const basePath = pathname.startsWith("/portfolio") ? "/portfolio" : "";
+
   return (
     <div ref={containerRef} className="relative w-full h-screen bg-[#FAFAFA] overflow-hidden">
       <div className="flex h-full w-full flex-col items-center justify-center" style={{ perspective: "1000px" }}>
@@ -216,6 +220,9 @@ export default function ScrollMorphHero({ lang, heroSchool, heroSubtitle, heroCt
 
         {/* Arc Active Content - Fades in */}
         <motion.div style={{ opacity: contentOpacity, y: contentY }} className="absolute top-[12%] z-10 flex flex-col items-center justify-center text-center pointer-events-none px-4">
+          <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-4 border-white shadow-xl mx-auto mb-6">
+            <img src={`${basePath}/avatar.jpg`} alt="陈希" className="w-full h-full object-cover" />
+          </div>
           <p className="text-[10px] font-semibold tracking-[0.25em] uppercase text-gray-400 mb-4">{heroSchool}</p>
           <h2 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight mb-3">
             陈<span className="text-framer">希</span>
