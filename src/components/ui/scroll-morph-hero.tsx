@@ -106,6 +106,10 @@ export default function ScrollMorphHero({ lang, heroSchool, heroSubtitle, heroCt
     const container = containerRef.current;
     if (!container) return;
     const handleWheel = (e: WheelEvent) => {
+      // Let natural scroll pass when at boundaries
+      if ((scrollRef.current <= 0 && e.deltaY < 0) || (scrollRef.current >= MAX_SCROLL && e.deltaY > 0)) {
+        return; // let browser scroll the page
+      }
       e.preventDefault();
       const newScroll = Math.min(Math.max(scrollRef.current + e.deltaY * 0.8, 0), MAX_SCROLL);
       scrollRef.current = newScroll;
