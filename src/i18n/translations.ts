@@ -53,7 +53,7 @@ export const t = {
     rank2: { zh: "专业排名 2/46（前 5%）", en: "Rank 2/46 (Top 5%)" },
     awards2: { zh: ["厦门市陈嘉庚教育基金奖学金", "专业一等奖学金 ×1 · 二等奖学金 ×5", "校级优秀毕业生 · 优秀学生干部", "校级优秀共青团员 · 优秀共青团干部"], en: ["Chen Jiageng Scholarship", "First-class Scholarship ×1 · Second-class ×5", "Outstanding Graduate · Student Leader", "Excellent League Member · Leader"] },
     current: { zh: "在读", en: "Current" },
-    gpaLabel: { zh: "GPA / 均分", en: "GPA / Average" },
+    gpaLabel: { zh: "均分", en: "Average" },
     rankLabel: { zh: "专业排名", en: "Class Rank" },
   },
   experience: {

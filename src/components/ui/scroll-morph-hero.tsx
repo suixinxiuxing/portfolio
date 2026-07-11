@@ -13,16 +13,6 @@ interface CardData {
   color: string;
 }
 
-const cards: CardData[] = [
-  { id: "about", href: "#about", labelEn: "About", labelZh: "关于", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=300&q=80", color: "#8b5cf6" },
-  { id: "education", href: "#education", labelEn: "Education", labelZh: "教育", img: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=80", color: "#7c3aed" },
-  { id: "experience", href: "#experience", labelEn: "Experience", labelZh: "经历", img: "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?w=300&q=80", color: "#6366f1" },
-  { id: "projects", href: "#projects", labelEn: "Projects", labelZh: "项目", img: "https://images.unsplash.com/photo-1507413245164-6160d8298b31?w=300&q=80", color: "#3b82f6" },
-  { id: "research", href: "#research", labelEn: "Research", labelZh: "科研", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=300&q=80", color: "#06b6d4" },
-  { id: "skills", href: "#skills", labelEn: "Skills", labelZh: "技能", img: "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?w=300&q=80", color: "#0891b2" },
-  { id: "contact", href: "#contact", labelEn: "Contact", labelZh: "联系", img: "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?w=300&q=80", color: "#0e7490" },
-];
-
 interface ScrollMorphHeroProps {
   lang: "zh" | "en";
   heroSchool: string;
@@ -39,6 +29,16 @@ export default function ScrollMorphHero({ lang, heroSchool, heroSubtitle, heroCt
   const navigateTo = (href: string) => {
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
   };
+
+  const cards: CardData[] = [
+    { id: "about", href: "#about", labelEn: "About", labelZh: "关于", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=300&q=80", color: "#8b5cf6" },
+    { id: "education", href: "#education", labelEn: "Education", labelZh: "教育", img: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=80", color: "#7c3aed" },
+    { id: "experience", href: "#experience", labelEn: "Experience", labelZh: "经历", img: `${basePath || "/portfolio"}/images/internship/图片6.jpg`, color: "#6366f1" },
+    { id: "projects", href: "#projects", labelEn: "Projects", labelZh: "项目", img: `${basePath || "/portfolio"}/images/projects/溯海行舟/微塑料收集三体船.png`, color: "#3b82f6" },
+    { id: "research", href: "#research", labelEn: "Research", labelZh: "科研", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=300&q=80", color: "#06b6d4" },
+    { id: "skills", href: "#skills", labelEn: "Skills", labelZh: "技能", img: "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?w=300&q=80", color: "#0891b2" },
+    { id: "contact", href: "#contact", labelEn: "Contact", labelZh: "联系", img: "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?w=300&q=80", color: "#0e7490" },
+  ];
 
   return (
     <div className="relative w-full h-screen bg-[#FAFAFA] overflow-hidden">
