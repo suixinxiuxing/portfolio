@@ -9,7 +9,7 @@ export default function About() {
     { v: "90.48", u: "/100", l: tt("about.stat1"), s: tt("about.stat1sub") },
     { v: "6", u: "", l: tt("about.stat2"), s: tt("about.stat2sub") },
     { v: "3", u: "", l: tt("about.stat3"), s: tt("about.stat3sub") },
-    { v: "10+", u: "", l: tt("about.stat4"), s: tt("about.stat4sub") },
+    { v: "20+", u: "", l: tt("about.stat4"), s: tt("about.stat4sub") },
   ];
   return (
     <section id="about" className="py-32 px-6 bg-white">

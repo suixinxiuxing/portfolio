@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiX } from "react-icons/hi";
 import SectionHeading from "./SectionHeading";
@@ -33,17 +33,26 @@ const honorImgs = [
 
 function ImageGallery({ images }: { images: string[] }) {
   const [selected, setSelected] = useState<string | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const handleWheel = (e: React.WheelEvent) => {
+    if (scrollRef.current) {
+      e.preventDefault();
+      scrollRef.current.scrollLeft += e.deltaY;
+    }
+  };
+
   return (
     <>
-      <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 mt-4">
+      <div ref={scrollRef} onWheel={handleWheel} className="flex gap-3 mt-4 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-thin cursor-grab active:cursor-grabbing" style={{ scrollbarWidth: "thin" }}>
         {images.map((src, i) => (
           <motion.div
             key={i}
-            className="aspect-[3/4] rounded-lg overflow-hidden cursor-pointer border border-gray-100 hover:border-[#8b5cf6]/40 transition-colors"
+            className="flex-shrink-0 w-[280px] sm:w-[360px] h-[200px] sm:h-[240px] rounded-xl overflow-hidden cursor-pointer border border-gray-100 hover:border-[#8b5cf6]/40 transition-colors snap-start"
             onClick={() => setSelected(src)}
-            whileHover={{ scale: 1.03 }}
+            whileHover={{ scale: 1.02 }}
           >
-            <img src={src} alt="" className="w-full h-full object-cover" loading="lazy" />
+            <img src={src} alt="" className="w-full h-full object-contain bg-gray-50" loading="lazy" />
           </motion.div>
         ))}
       </div>
@@ -51,7 +60,7 @@ function ImageGallery({ images }: { images: string[] }) {
         {selected && (
           <motion.div className="fixed inset-0 z-[100] bg-black/80 flex items-center justify-center p-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setSelected(null)}>
             <button className="absolute top-4 right-4 text-white text-2xl" onClick={() => setSelected(null)}><HiX /></button>
-            <img src={selected} alt="" className="max-h-[85vh] max-w-full rounded-xl shadow-2xl" />
+            <img src={selected} alt="" className="max-h-[90vh] max-w-[95vw] rounded-xl shadow-2xl object-contain" />
           </motion.div>
         )}
       </AnimatePresence>

@@ -8,9 +8,9 @@ export default function Research() {
   const { t: tt } = useT();
 
   const patents = [
-    { title: tt("research.pat1"), id: "CN120954199A", type: tt("research.pat1Type") },
-    { title: tt("research.pat2"), id: "ZL2023 2 0135062.8", type: tt("research.pat2Type") },
-    { title: tt("research.pat3"), id: "ZL 2023 3 0062702.2", type: tt("research.pat3Type") },
+    { title: tt("research.pat1"), id: "CN120954199A", type: tt("research.pat1Type"), link: "http://epub.cnipa.gov.cn/Dxb/IndexQuery" },
+    { title: tt("research.pat2"), id: "ZL2023 2 0135062.8", type: tt("research.pat2Type"), link: "http://epub.cnipa.gov.cn/Dxb/IndexQuery" },
+    { title: tt("research.pat3"), id: "ZL 2023 3 0062702.2", type: tt("research.pat3Type"), link: "http://epub.cnipa.gov.cn/Dxb/IndexQuery" },
   ];
 
   const papers = [
@@ -80,11 +80,11 @@ export default function Research() {
           </motion.div>
           <motion.div className="grid sm:grid-cols-3 gap-4" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ visible: { transition: { staggerChildren: 0.08 } } }}>
             {patents.map((p, i) => (
-              <motion.div key={p.id} className="card-framer p-5" variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0 } }}>
+              <motion.a key={p.id} href={p.link} target="_blank" rel="noopener noreferrer" className="card-framer p-5 block hover:border-[#8b5cf6]/40 transition-colors" variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0 } }}>
                 <span className="tag-framer text-[10px] mb-2 inline-block">{p.type}</span>
-                <p className="text-sm text-gray-600 leading-relaxed font-medium">{p.title}</p>
+                <p className="text-sm text-gray-600 hover:text-[#8b5cf6] transition-colors leading-relaxed font-medium">{p.title}</p>
                 <p className="text-[10px] text-gray-400 font-mono mt-1.5">{p.id}</p>
-              </motion.div>
+              </motion.a>
             ))}
           </motion.div>
         </div>
