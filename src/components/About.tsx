@@ -7,7 +7,7 @@ export default function About() {
   const { t: tt } = useT();
   const stats = [
     { v: "90.48", u: "/100", l: tt("about.stat1"), s: tt("about.stat1sub") },
-    { v: "5", u: "", l: tt("about.stat2"), s: tt("about.stat2sub") },
+    { v: "6", u: "", l: tt("about.stat2"), s: tt("about.stat2sub") },
     { v: "3", u: "", l: tt("about.stat3"), s: tt("about.stat3sub") },
     { v: "10+", u: "", l: tt("about.stat4"), s: tt("about.stat4sub") },
   ];
