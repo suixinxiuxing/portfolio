@@ -3,11 +3,15 @@ import { motion } from "framer-motion";
 import SectionHeading from "./SectionHeading";
 import { useT } from "@/i18n/LanguageContext";
 
+
+const baseP = "/images/projects";
+const p1Imgs = [baseP + "/溯海行舟/ocean-cleaner-main.png", baseP + "/溯海行舟/ocean-cleaner-1.png", baseP + "/溯海行舟/ocean-cleaner-2.png", baseP + "/溯海行舟/ocean-cleaner-3.jpg"];
+const p2Imgs = [baseP + "/精卫听音/ocean-ear-1.jpg", baseP + "/精卫听音/ocean-ear-2.png"];
 export default function Projects() {
   const { t: tt } = useT();
   const projects = [
-    { title: tt("projects.p1Title"), sub: tt("projects.p1Sub"), role: tt("projects.p1Role"), period: "2021.10 — 2023.06", techs: ["STAR-CCM+", "CFD", "Structural"], details: [tt("projects.p1d1"), tt("projects.p1d2")], award: tt("projects.p1Award") },
-    { title: tt("projects.p2Title"), sub: tt("projects.p2Sub"), role: tt("projects.p2Role"), period: "2022.03 — 2022.07", techs: ["Python", "Signal", "Acoustics"], details: [tt("projects.p2d1"), tt("projects.p2d2")], award: tt("projects.p2Award") },
+    { title: tt("projects.p1Title"), sub: tt("projects.p1Sub"), role: tt("projects.p1Role"), period: "2021.10 — 2023.06", techs: ["STAR-CCM+", "CFD", "Structural"], imgs: p1Imgs, details: [tt("projects.p1d1"), tt("projects.p1d2")], award: tt("projects.p1Award") },
+    { title: tt("projects.p2Title"), sub: tt("projects.p2Sub"), role: tt("projects.p2Role"), period: "2022.03 — 2022.07", techs: ["Python", "Signal", "Acoustics"], imgs: p2Imgs, details: [tt("projects.p2d1"), tt("projects.p2d2")], award: tt("projects.p2Award") },
   ];
   return (
     <section id="projects" className="py-32 px-6 bg-[#fafafa]">
@@ -21,6 +25,16 @@ export default function Projects() {
               <div className="flex flex-wrap gap-2 mb-4"><span className="tag-framer">{p.role}</span>{p.award && <span className="tag-framer tag-framer-muted">🏆 {p.award}</span>}</div>
               <div className="flex flex-wrap gap-1.5 mb-4">{p.techs.map(t => <span key={t} className="tag-framer tag-framer-muted text-xs">{t}</span>)}</div>
               <ul className="space-y-2 text-sm text-gray-500 leading-relaxed flex-1">{p.details.map((d,j) => <li key={j} className="flex items-start gap-2"><span className="mt-1.5 w-1 h-1 rounded-full bg-[#8b5cf6]/50 shrink-0"/>{d}</li>)}</ul>
+              {p.imgs && (
+                <div className="grid grid-cols-2 gap-2 mb-4">
+                  {p.imgs.map((src: string, i: number) => (
+                    <div key={i} className="aspect-[4/3] rounded-lg overflow-hidden border border-gray-100">
+                      <img src={src} alt="" className="w-full h-full object-cover" loading="lazy" />
+                    </div>
+                  ))}
+                </div>
+              )}
+
             </motion.div>
           ))}
         </motion.div>

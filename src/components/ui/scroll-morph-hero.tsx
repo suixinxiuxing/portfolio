@@ -22,8 +22,8 @@ interface ScrollMorphHeroProps {
 }
 
 export default function ScrollMorphHero({ lang, heroSchool, heroSubtitle, heroCta1, heroCta2 }: ScrollMorphHeroProps) {
-  const pathname = usePathname();
-  const basePath = pathname && pathname.startsWith("/portfolio") ? "/portfolio" : "";
+  const pathname = usePathname() || "/portfolio";
+  const basePath = pathname.startsWith("/portfolio") ? "/portfolio" : "";
   const [flipped, setFlipped] = useState<string | null>(null);
 
   const navigateTo = (href: string) => {
@@ -33,8 +33,8 @@ export default function ScrollMorphHero({ lang, heroSchool, heroSubtitle, heroCt
   const cards: CardData[] = [
     { id: "about", href: "#about", labelEn: "About", labelZh: "关于", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=300&q=80", color: "#8b5cf6" },
     { id: "education", href: "#education", labelEn: "Education", labelZh: "教育", img: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=80", color: "#7c3aed" },
-    { id: "experience", href: "#experience", labelEn: "Experience", labelZh: "经历", img: `${basePath || "/portfolio"}/images/internship/图片6.jpg`, color: "#6366f1" },
-    { id: "projects", href: "#projects", labelEn: "Projects", labelZh: "项目", img: `${basePath || "/portfolio"}/images/projects/溯海行舟/微塑料收集三体船.png`, color: "#3b82f6" },
+    { id: "experience", href: "#experience", labelEn: "Experience", labelZh: "经历", img: `${basePath}/images/internship/intern-1.jpg`, color: "#6366f1" },
+    { id: "projects", href: "#projects", labelEn: "Projects", labelZh: "项目", img: `${basePath}/images/projects/溯海行舟/ocean-cleaner-main.png`, color: "#3b82f6" },
     { id: "research", href: "#research", labelEn: "Research", labelZh: "科研", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=300&q=80", color: "#06b6d4" },
     { id: "skills", href: "#skills", labelEn: "Skills", labelZh: "技能", img: "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?w=300&q=80", color: "#0891b2" },
     { id: "contact", href: "#contact", labelEn: "Contact", labelZh: "联系", img: "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?w=300&q=80", color: "#0e7490" },
@@ -54,7 +54,7 @@ export default function ScrollMorphHero({ lang, heroSchool, heroSubtitle, heroCt
           transition={{ duration: 0.5 }}
           className="w-56 h-56 sm:w-64 sm:h-64 rounded-full overflow-hidden border-4 border-white shadow-xl mb-8"
         >
-          <img src={`${basePath || "/portfolio"}/avatar.jpg`} alt="陈希" className="w-full h-full object-cover object-[center_23%]" />
+          <img src={`${basePath}/avatar.jpg`} alt="陈希" className="w-full h-full object-cover object-[center_23%]" />
         </motion.div>
 
         {/* School */}

@@ -4,6 +4,9 @@ import { FiClock, FiMapPin } from "react-icons/fi";
 import SectionHeading from "./SectionHeading";
 import { useT } from "@/i18n/LanguageContext";
 
+const base = "/images/internship";
+const internImgs = [`${base}/intern-1.jpg`, `${base}/intern-2.jpg`, `${base}/intern-3.jpg`, `${base}/intern-4.jpg`];
+
 export default function Experience() {
   const { t: tt } = useT();
   const internship = [{ title: tt("experience.exp1Title"), org: tt("experience.exp1Org"), period: tt("experience.exp1Period"), loc: tt("experience.exp1Loc"), items: [tt("experience.exp1d1"), tt("experience.exp1d2")] }];
@@ -32,6 +35,13 @@ export default function Experience() {
               <ul className="space-y-3 text-sm text-gray-500 leading-relaxed">{e.items.map((d,j) => <li key={j} className="flex items-start gap-3"><span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#8b5cf6]/50 shrink-0"/>{d}</li>)}</ul>
             </motion.div>
           ))}
+          <div className="grid grid-cols-4 gap-2 mt-4">
+            {internImgs.map((src, i) => (
+              <motion.div key={i} className="aspect-[4/3] rounded-lg overflow-hidden border border-gray-100 hover:border-[#8b5cf6]/40 transition-colors cursor-pointer" whileHover={{ scale: 1.02 }}>
+                <img src={src} alt="" className="w-full h-full object-cover" loading="lazy" />
+              </motion.div>
+            ))}
+          </div>
         </div>
         {/* Campus */}
         <div className="max-w-5xl mx-auto">
