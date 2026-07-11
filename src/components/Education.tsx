@@ -7,8 +7,8 @@ import { useT } from "@/i18n/LanguageContext";
 export default function Education() {
   const { t: tt } = useT();
   const edu = [
-    { school: tt("education.school1"), degree: tt("education.degree1"), period: tt("education.period1"), location: tt("education.loc1"), gpa: tt("education.gpa1"), rank: tt("education.rank1"), awards: (tt("education.awards1") as unknown) as string[], current: true },
-    { school: tt("education.school2"), degree: tt("education.degree2"), period: tt("education.period2"), location: tt("education.loc2"), gpa: tt("education.gpa2"), rank: tt("education.rank2"), awards: (tt("education.awards2") as unknown) as string[], current: false },
+    { school: tt("education.school1"), degree: tt("education.degree1"), period: tt("education.period1"), location: tt("education.loc1"), gpa: tt("education.gpa1"), avg: tt("education.avg1"), rank: tt("education.rank1"), awards: (tt("education.awards1") as unknown) as string[], current: true },
+    { school: tt("education.school2"), degree: tt("education.degree2"), period: tt("education.period2"), location: tt("education.loc2"), gpa: tt("education.gpa2"), avg: tt("education.avg2"), rank: tt("education.rank2"), awards: (tt("education.awards2") as unknown) as string[], current: false },
   ];
 
   return (
@@ -27,9 +27,10 @@ export default function Education() {
                     {e.current && <span className="tag-framer">{tt("education.current")}</span>}
                   </div>
                   <div className="flex flex-wrap gap-4 text-[10px]text-gray-400 mb-4"><span className="flex items-center gap-1"><FiClock size={10}/> {e.period}</span><span className="flex items-center gap-1"><FiMapPin size={10}/> {e.location}</span></div>
-                  <div className="grid sm:grid-cols-2 gap-3 mb-4">
-                    <div className="bg-gray-50 rounded-xl p-3 text-center"><div className="text-base font-bold text-gray-900">{e.gpa}</div><div className="text-[10px] text-gray-400 uppercase tracking-wider mt-0.5">{tt("education.gpaLabel")}</div></div>
-                    <div className="bg-purple-50 rounded-xl p-3 text-center"><div className="text-base font-bold text-[#7c3aed]">{e.rank}</div><div className="text-[10px] text-gray-400 uppercase tracking-wider mt-0.5">{tt("education.rankLabel")}</div></div>
+                  <div className="grid grid-cols-3 gap-2 mb-4">
+                    <div className="bg-gray-50 rounded-xl p-2 text-center"><div className="text-sm font-bold text-gray-900">{e.gpa}</div><div className="text-[9px] text-gray-400 mt-0.5">GPA</div></div>
+                    <div className="bg-gray-50 rounded-xl p-2 text-center"><div className="text-sm font-bold text-gray-900">{e.avg}</div><div className="text-[9px] text-gray-400 mt-0.5">{tt("education.gpaLabel")}</div></div>
+                    <div className="bg-purple-50 rounded-xl p-2 text-center"><div className="text-xs font-bold text-[#7c3aed]">{e.rank}</div><div className="text-[9px] text-gray-400 mt-0.5">{tt("education.rankLabel")}</div></div>
                   </div>
                   <div className="flex flex-wrap gap-1.5">{e.awards.map(a => <span key={a} className="tag-framer tag-framer-muted text-xs">{a}</span>)}</div>
                 </div>

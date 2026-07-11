@@ -33,7 +33,7 @@ interface ScrollMorphHeroProps {
 
 export default function ScrollMorphHero({ lang, heroSchool, heroSubtitle, heroCta1, heroCta2 }: ScrollMorphHeroProps) {
   const pathname = usePathname();
-  const basePath = pathname.startsWith("/portfolio") ? "/portfolio" : "";
+  const basePath = pathname && pathname.startsWith("/portfolio") ? "/portfolio" : "";
   const [flipped, setFlipped] = useState<string | null>(null);
 
   const navigateTo = (href: string) => {
@@ -54,7 +54,7 @@ export default function ScrollMorphHero({ lang, heroSchool, heroSubtitle, heroCt
           transition={{ duration: 0.5 }}
           className="w-56 h-56 sm:w-64 sm:h-64 rounded-full overflow-hidden border-4 border-white shadow-xl mb-8"
         >
-          <img src={`${basePath}/avatar.jpg`} alt="陈希" className="w-full h-full object-cover object-[center_23%]" />
+          <img src={`${basePath || "/portfolio"}/avatar.jpg`} alt="陈希" className="w-full h-full object-cover object-[center_23%]" />
         </motion.div>
 
         {/* School */}
