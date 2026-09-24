@@ -8,9 +8,26 @@ export default function Research() {
   const { t: tt } = useT();
 
   const patents = [
-    { title: tt("research.pat1"), id: "CN120954199A", type: tt("research.pat1Type"), link: "http://epub.cnipa.gov.cn/Dxb/IndexQuery" },
     { title: tt("research.pat2"), id: "ZL2023 2 0135062.8", type: tt("research.pat2Type"), link: "http://epub.cnipa.gov.cn/Dxb/IndexQuery" },
     { title: tt("research.pat3"), id: "ZL 2023 3 0062702.2", type: tt("research.pat3Type"), link: "http://epub.cnipa.gov.cn/Dxb/IndexQuery" },
+    {
+      title: tt("research.pat4"),
+      id: "ZL202511043698.X",
+      type: tt("research.pat4Type"),
+      link: "https://kns.cnki.net/kcms2/article/abstract?v=VNVtbp4NFXcUNC9Pha8DTpcZN_gVJjVM3q6YKRPNPSBiOFg19p-JquZZAm9a8tSxRHXR8XdO0iPY_iL-oXHGHrkw8NPRkb8sDkl5o9_s7kGw13CGHy7dPw0o2wEwWWRD8dfNrXzlmViU_r1krZfwpjlJwTxgPEevZT0q6BK1fPdnI7whWcJCfQ==",
+    },
+    {
+      title: tt("research.pat5"),
+      id: "202511372767.1",
+      type: tt("research.pat5Type"),
+      link: "https://kns.cnki.net/kcms2/article/abstract?v=VNVtbp4NFXc86WI7qxzpPAfb5zxG-JP9XbGaBuzAHTUVtqvqRv9LH_fzosmTd6fFUgDRJo19TSHK6IhXlZgfFAdaV89oE7pYtDOED8Kn0rGn5Qi0sFzj323mKuA4MlA12EOb2EVIjaDwh18RM3ND1j3A46CDAbPjuU2sZ0hN909_joKTNUtYJA==",
+    },
+    {
+      title: tt("research.pat6"),
+      id: "ZL202521459093.4",
+      type: tt("research.pat6Type"),
+      link: "https://kns.cnki.net/kcms2/article/abstract?v=VNVtbp4NFXcoRZlH4dKeDThY99A3escXAUyZrgdGog7a7DKRwl0WSZ6aMp_ueSnmI4wmvTZ1tR0eW7ukRHdg5m8CaSb7BpLjvluQDAd6OjrHu0Wc_oX8kNw-nP6xUgwDGeFoBa4k6YrUkwrpN4UsN-oylSJQnbyICT-rpUn5iiVRu2WU0p2PXw==",
+    },
   ];
 
   const papers = [
