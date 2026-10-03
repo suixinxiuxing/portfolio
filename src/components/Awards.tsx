@@ -1,123 +1,104 @@
 "use client";
-import { useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { HiX } from "react-icons/hi";
 import SectionHeading from "./SectionHeading";
 import { useT } from "@/i18n/LanguageContext";
+import { resumeAwards } from "@/data/resume-awards";
 
-const base = "/images/awards";
+type GalleryImage = { src: string; zh: string; en: string };
 
-const scholarshipImgs = [
-  `${base}/scholarship-2021-1-1st.jpg`,
-  `${base}/scholarship-chen-jiageng.jpg`,
-  `${base}/scholarship-2021-2-2nd.jpg`,
-  `${base}/scholarship-2020-1-3rd.jpg`,
-  `${base}/scholarship-2020-2-2nd.jpg`,
-];
+const awardImage = (name: string, zh: string, en: string): GalleryImage => ({ src: `images/awards/${name}`, zh, en });
+const groups = [
+  {
+    id: "scholarships",
+    title: { zh: "奖学金", en: "Scholarships" },
+    images: [
+      awardImage("scholarship-national-2025.jpg", "国家奖学金证书", "National Scholarship"),
+      awardImage("scholarship-2021-1-1st.jpg", "专业一等奖学金证书", "First-Class Academic Scholarship"),
+      awardImage("scholarship-chen-jiageng.jpg", "陈嘉庚教育基金奖学金证书", "Chen Jiageng Education Fund Scholarship"),
+      awardImage("scholarship-2021-2-2nd.jpg", "专业二等奖学金证书", "Second-Class Academic Scholarship"),
+      awardImage("scholarship-2020-1-3rd.jpg", "专业三等奖学金证书", "Third-Class Academic Scholarship"),
+      awardImage("scholarship-2020-2-2nd.jpg", "专业二等奖学金证书", "Second-Class Academic Scholarship"),
+    ],
+  },
+  {
+    id: "competitions",
+    title: { zh: "竞赛", en: "Competitions" },
+    images: [
+      awardImage("award-innovation-gold.png", "互联网+ 校级金奖证书", "Internet+ University Gold"),
+      awardImage("award-challenge-cup.jpg", "挑战杯校级三等奖证书", "Challenge Cup University Third Prize"),
+    ],
+  },
+  {
+    id: "honors",
+    title: { zh: "荣誉", en: "Honors" },
+    images: [
+      awardImage("honor-outstanding-postgraduate.png", "优秀研究生证书", "Outstanding Graduate Student"),
+      awardImage("honor-outstanding-graduate-2024.jpg", "优秀毕业生证书", "Outstanding Graduate"),
+      awardImage("honor-merit-student-2022.jpg", "三好学生证书", "Merit Student"),
+      awardImage("honor-merit-student-2023.jpg", "三好学生证书", "Merit Student"),
+      awardImage("honor-student-leader-2021.jpg", "优秀学生干部证书", "Excellent Student Leader"),
+      awardImage("honor-league-member-2021.jpg", "优秀共青团员证书", "Excellent League Member"),
+      awardImage("honor-league-leader-2022.jpg", "优秀共青团干部证书", "Excellent League Leader"),
+      awardImage("award-teaching-officer-2021.jpg", "优秀学生教学信息员证书", "Excellent Teaching Information Officer"),
+      awardImage("award-teaching-officer-2022.jpg", "优秀学生教学信息员证书", "Excellent Teaching Information Officer"),
+      awardImage("award-teaching-officer-2024.jpg", "优秀学生教学信息员证书", "Excellent Teaching Information Officer"),
+    ],
+  },
+] as const;
 
-const competitionImgs = [
-  `${base}/award-innovation-gold.png`,
-  `${base}/award-challenge-cup.jpg`,
-];
+function thumbnail(src: string) {
+  const filename = src.split("/").pop() ?? "";
+  return `images/awards/thumbs/${filename.replace(/\.(jpe?g|png)$/i, ".webp")}`;
+}
 
-const honorImgs = [
-  `${base}/honor-merit-student-2022.jpg`,
-  `${base}/honor-merit-student-2023.jpg`,
-  `${base}/honor-student-leader-2021.jpg`,
-  `${base}/honor-league-member-2021.jpg`,
-  `${base}/honor-league-leader-2022.jpg`,
-  `${base}/award-teaching-officer-2021.jpg`,
-  `${base}/award-teaching-officer-2022.jpg`,
-  `${base}/award-teaching-officer-2024.jpg`,
-];
+function CertificateGallery({ images }: { images: readonly GalleryImage[] }) {
+  const { lang } = useT();
+  const [selected, setSelected] = useState<GalleryImage | null>(null);
+  const dialog = useRef<HTMLDialogElement>(null);
 
-function ImageGallery({ images }: { images: string[] }) {
-  const [selected, setSelected] = useState<string | null>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!selected) return;
+    const previous = document.activeElement as HTMLElement | null;
+    const oldOverflow = document.body.style.overflow;
+    dialog.current?.showModal();
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = oldOverflow; previous?.focus(); };
+  }, [selected]);
 
-  const handleWheel = (e: React.WheelEvent) => {
-    if (scrollRef.current) {
-      e.preventDefault();
-      scrollRef.current.scrollLeft += e.deltaY;
-    }
-  };
-
-  return (
-    <>
-      <div ref={scrollRef} onWheel={handleWheel} className="flex gap-3 mt-4 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-thin cursor-grab active:cursor-grabbing" style={{ scrollbarWidth: "thin" }}>
-        {images.map((src, i) => (
-          <motion.div
-            key={i}
-            className="flex-shrink-0 w-[280px] sm:w-[360px] h-[200px] sm:h-[240px] rounded-xl overflow-hidden cursor-pointer border border-gray-100 hover:border-[#8b5cf6]/40 transition-colors snap-start"
-            onClick={() => setSelected(src)}
-            whileHover={{ scale: 1.02 }}
-          >
-            <img src={src} alt="" className="w-full h-full object-contain bg-gray-50" loading="lazy" />
-          </motion.div>
-        ))}
-      </div>
-      <AnimatePresence>
-        {selected && (
-          <motion.div className="fixed inset-0 z-[100] bg-black/80 flex items-center justify-center p-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setSelected(null)}>
-            <button className="absolute top-4 right-4 text-white text-2xl" onClick={() => setSelected(null)}><HiX /></button>
-            <img src={selected} alt="" className="max-h-[90vh] max-w-[95vw] rounded-xl shadow-2xl object-contain" />
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
-  );
+  return <>
+    <div className="certificate-grid">
+      {images.map((image) => <button type="button" className="certificate-button" key={image.src} onClick={() => setSelected(image)} aria-label={`${lang === "zh" ? "放大查看" : "Enlarge"}: ${image[lang]}`}>
+        <Image width={640} height={450} src={thumbnail(image.src)} alt="" loading="lazy" />
+        <span>{image[lang]}</span>
+      </button>)}
+    </div>
+    {selected && <dialog className="certificate-dialog" ref={dialog} aria-label={selected[lang]} onClose={() => setSelected(null)} onClick={(event) => { if (event.target === event.currentTarget) dialog.current?.close(); }}>
+      <button autoFocus type="button" className="dialog-close" aria-label={lang === "zh" ? "关闭证书预览" : "Close certificate preview"} onClick={() => dialog.current?.close()}><HiX aria-hidden="true" /></button>
+      <Image width={1120} height={790} src={selected.src} alt={selected[lang]} />
+      <p>{selected[lang]}</p>
+    </dialog>}
+  </>;
 }
 
 export default function Awards() {
-  const { t: tt } = useT();
-
-  const scholarships = [tt("awards.s1"), tt("awards.s2"), tt("awards.s3"), tt("awards.s4"), tt("awards.s5")];
-  const competitions = [tt("awards.c1"), tt("awards.c2"), tt("awards.c3")];
-  const honors = [tt("awards.h1"), tt("awards.h2"), tt("awards.h3"), tt("awards.h4"), tt("awards.h5"), tt("awards.h6"), tt("awards.h7"), tt("awards.h8")];
-
-  const item = { hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0, transition: { duration: 0.3 } } };
-
-  return (
-    <section id="awards" className="py-32 px-6 bg-white">
-      <div className="max-w-7xl mx-auto">
-        <SectionHeading label={tt("awards.label")} title={tt("awards.title")} />
-
-        {/* Scholarships */}
-        <div className="max-w-5xl mx-auto mb-16">
-          <motion.div className="flex items-center gap-3 mb-4" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-            <div className="w-8 h-8 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center text-[#7c3aed] text-xs font-bold">01</div>
-            <h3 className="text-lg font-bold text-gray-900">{tt("awards.scholarship")}</h3>
-          </motion.div>
-          <motion.div className="flex flex-wrap gap-2 mb-4" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ visible: { transition: { staggerChildren: 0.05 } } }}>
-            {scholarships.map((s, i) => <motion.span key={i} className="card-framer px-5 py-3 text-sm text-gray-600 font-medium" variants={item}>{s}</motion.span>)}
-          </motion.div>
-          <ImageGallery images={scholarshipImgs} />
-        </div>
-
-        {/* Competitions */}
-        <div className="max-w-5xl mx-auto mb-16">
-          <motion.div className="flex items-center gap-3 mb-4" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-            <div className="w-8 h-8 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-[#3b82f6] text-xs font-bold">02</div>
-            <h3 className="text-lg font-bold text-gray-900">{tt("awards.competition")}</h3>
-          </motion.div>
-          <motion.div className="flex flex-wrap gap-2 mb-4" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ visible: { transition: { staggerChildren: 0.05 } } }}>
-            {competitions.map((c, i) => <motion.span key={i} className="card-framer px-5 py-3 text-sm text-gray-600 font-medium" variants={item}>{c}</motion.span>)}
-          </motion.div>
-          <ImageGallery images={competitionImgs} />
-        </div>
-
-        {/* Honors */}
-        <div className="max-w-5xl mx-auto">
-          <motion.div className="flex items-center gap-3 mb-4" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-            <div className="w-8 h-8 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 text-xs font-bold">03</div>
-            <h3 className="text-lg font-bold text-gray-900">{tt("awards.honor")}</h3>
-          </motion.div>
-          <motion.div className="grid sm:grid-cols-2 gap-2 mb-4" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ visible: { transition: { staggerChildren: 0.05 } } }}>
-            {honors.map((h, i) => <motion.div key={i} className="card-framer px-5 py-3 text-sm text-gray-600 font-medium" variants={item}>{h}</motion.div>)}
-          </motion.div>
-          <ImageGallery images={honorImgs} />
-        </div>
+  const { lang } = useT();
+  return <section id="awards" className="resume-section">
+    <div className="section-container">
+      <SectionHeading label={lang === "zh" ? "荣誉 / 08" : "Recognition / 08"} title={lang === "zh" ? "荣誉与认可" : "Awards & recognition"} />
+      <p className="section-intro">{lang === "zh" ? "按时间整理的获奖记录。需要查看证明材料时，可展开证书档案。" : "A dated record of awards, with certificate evidence available on demand."}</p>
+      <div className="recent-awards">{resumeAwards.slice(0, 4).map((award) => <span className="tag-framer" key={`${award.date}-${award.name.zh}`}>{award.name[lang]} · {award.date}</span>)}</div>
+      <details className="award-history"><summary>{lang === "zh" ? `查看完整获奖记录 · ${resumeAwards.length} 项` : `View complete award history · ${resumeAwards.length}`}</summary>
+        <ol className="award-records">{resumeAwards.map((award, index) => <li key={`${award.date}-${award.name.zh}-${index}`}><time dateTime={award.date}>{award.date}</time><span>{award.name[lang]}{award.rank ? ` · ${award.rank[lang]}` : ""}</span><small>{award.level[lang]}</small></li>)}</ol>
+      </details>
+      <div className="certificate-sections">
+        {groups.map((group, index) => <details className="certificate-archive" key={group.id}>
+          <summary><span>0{index + 1} / {group.title[lang]}</span><span>{group.images.length} {lang === "zh" ? "张证书" : "certificates"}</span></summary>
+          <CertificateGallery images={group.images} />
+        </details>)}
       </div>
-    </section>
-  );
+    </div>
+  </section>;
 }

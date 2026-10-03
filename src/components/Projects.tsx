@@ -1,43 +1,55 @@
 "use client";
-import { motion } from "framer-motion";
+
+import Image from "next/image";
 import SectionHeading from "./SectionHeading";
 import { useT } from "@/i18n/LanguageContext";
+import { resumeProjects } from "@/data/resume-projects";
 
-
-const baseP = "/images/projects";
-const p1Imgs = [baseP + "/溯海行舟/ocean-cleaner-main.png", baseP + "/溯海行舟/ocean-cleaner-1.png", baseP + "/溯海行舟/ocean-cleaner-2.png", baseP + "/溯海行舟/ocean-cleaner-3.jpg"];
-const p2Imgs = [baseP + "/精卫听音/ocean-ear-1.jpg", baseP + "/精卫听音/ocean-ear-2.png"];
 export default function Projects() {
-  const { t: tt } = useT();
-  const projects = [
-    { title: tt("projects.p1Title"), sub: tt("projects.p1Sub"), role: tt("projects.p1Role"), period: "2021.10 — 2023.06", techs: ["STAR-CCM+", "CFD", "Structural"], imgs: p1Imgs, details: [tt("projects.p1d1"), tt("projects.p1d2")], award: tt("projects.p1Award") },
-    { title: tt("projects.p2Title"), sub: tt("projects.p2Sub"), role: tt("projects.p2Role"), period: "2022.03 — 2022.07", techs: ["Python", "Signal", "Acoustics"], imgs: p2Imgs, details: [tt("projects.p2d1"), tt("projects.p2d2")], award: tt("projects.p2Award") },
-  ];
-  return (
-    <section id="projects" className="py-32 px-6 bg-[#fafafa]">
-      <div className="max-w-7xl mx-auto">
-        <SectionHeading label={tt("projects.label")} title={tt("projects.title")} />
-        <motion.div className="grid md:grid-cols-2 gap-5 max-w-5xl mx-auto" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ visible: { transition: { staggerChildren: 0.12 } } }}>
-          {projects.map(p => (
-            <motion.div key={p.title} className="card-framer p-7 sm:p-8 flex flex-col" variants={{ hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0 } }}>
-              <div className="flex items-start justify-between mb-3"><h3 className="text-base font-bold text-gray-900">{p.title}</h3><span className="text-[10px]text-gray-400 font-mono mt-1 shrink-0">{p.period}</span></div>
-              <p className="text-[#7c3aed]/70 text-[10px]font-medium mb-4">{p.sub}</p>
-              <div className="flex flex-wrap gap-2 mb-4"><span className="tag-framer">{p.role}</span>{p.award && <span className="tag-framer tag-framer-muted">🏆 {p.award}</span>}</div>
-              <div className="flex flex-wrap gap-1.5 mb-4">{p.techs.map(t => <span key={t} className="tag-framer tag-framer-muted text-xs">{t}</span>)}</div>
-              <ul className="space-y-2 text-sm text-gray-500 leading-relaxed flex-1">{p.details.map((d,j) => <li key={j} className="flex items-start gap-2"><span className="mt-1.5 w-1 h-1 rounded-full bg-[#8b5cf6]/50 shrink-0"/>{d}</li>)}</ul>
-              {p.imgs && (
-                <div className="grid grid-cols-2 gap-2 mb-4">
-                  {p.imgs.map((src: string, i: number) => (
-                    <div key={i} className="aspect-[4/3] rounded-lg overflow-hidden border border-gray-100">
-                      <img src={src} alt="" className="w-full h-full object-cover" loading="lazy" />
-                    </div>
-                  ))}
-                </div>
-              )}
+  const { t, lang } = useT();
+  const ordered = [resumeProjects[5], resumeProjects[6], resumeProjects[1], resumeProjects[3], resumeProjects[0], resumeProjects[2], resumeProjects[4]];
 
-            </motion.div>
-          ))}
-        </motion.div>
+  return (
+    <section id="projects" className="resume-section">
+      <div className="section-container">
+        <SectionHeading label={t("projects.label")} title={lang === "zh" ? "项目实践与成果" : "Projects & outcomes"} />
+        <p className="section-intro">{lang === "zh" ? "从海洋环境议题到流体仿真与数据建模，选取能说明问题、方法与结果的代表项目。" : "Selected work spanning marine challenges, fluid simulation and data modelling—each framed by its problem, method and outcome."}</p>
+        <div className="project-grid">
+          {ordered.map((project, index) => {
+            const featured = project.images.length > 0;
+            return (
+              <article className={`project-card ${featured ? "project-card-featured" : "project-card-compact"}`} key={project.id}>
+                {featured ? (
+                  <div className="project-media">
+                    <a className="project-main-image" href={project.images[0]} target="_blank" rel="noopener noreferrer" aria-label={`${project.title[lang]} · ${lang === "zh" ? "查看大图" : "view image"}`}>
+                      <Image src={project.images[0]!} alt={"imageAlt" in project ? project.imageAlt[lang] : project.title[lang]} width={640} height={480} loading="lazy" />
+                    </a>
+                    <div className="project-thumbs">
+                      {project.images.slice(1).map((src, imageIndex) => (
+                        <a href={src} target="_blank" rel="noopener noreferrer" key={src} aria-label={`${project.title[lang]} · ${imageIndex + 2}`}>
+                          <Image src={src} alt={`${project.title[lang]} · ${lang === "zh" ? "补充项目图像" : "additional project image"} ${imageIndex + 2}`} width={240} height={180} loading="lazy" />
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="project-index" aria-hidden="true"><span>{String(index + 1).padStart(2, "0")}</span><p>{project.category[lang]}</p></div>
+                )}
+                <div className="project-content">
+                  <div className="project-meta"><span>{project.period}</span><span>{project.role[lang]}</span></div>
+                  <h3>{project.title[lang]}</h3>
+                  <p>{project.summary[lang]}</p>
+                  {"outcome" in project && <p className="project-highlight">{project.outcome[lang]}</p>}
+                  <div className="project-techs">{project.techs.map((tech) => <span key={tech}>{tech}</span>)}</div>
+                  <details className="project-details">
+                    <summary>{lang === "zh" ? "查看我的贡献与项目成果" : "Read my contribution & outcomes"}</summary>
+                    <ul>{project.details[lang].map((detail) => <li key={detail}>{detail}</li>)}</ul>
+                  </details>
+                </div>
+              </article>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

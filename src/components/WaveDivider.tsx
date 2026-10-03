@@ -1,17 +1,15 @@
-"use client";
-
 interface WaveDividerProps {
   flip?: boolean;
   color?: "light" | "white" | "dark";
 }
 
-export default function WaveDivider({ flip, color = "light" }: WaveDividerProps) {
-  const fills: Record<string, { top: string; bottom: string }> = {
-    light: { top: "#ffffff", bottom: "#f8fafc" },
-    white: { top: "#f8fafc", bottom: "#ffffff" },
-    dark: { top: "#ffffff", bottom: "#0f172a" },
-  };
+const fills = {
+  light: { top: "#ffffff", bottom: "#f8fafc" },
+  white: { top: "#f8fafc", bottom: "#ffffff" },
+  dark: { top: "#ffffff", bottom: "#0f172a" },
+};
 
+export default function WaveDivider({ flip, color = "light" }: WaveDividerProps) {
   const { top, bottom } = fills[color];
   const path = flip
     ? "M0,0 C240,50 480,-15 720,5 C960,25 1200,-5 1440,0 L1440,60 L0,60 Z"

@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { usePathname } from "next/navigation";
 
 interface CardData {
   id: string;
@@ -22,8 +21,10 @@ interface ScrollMorphHeroProps {
 }
 
 export default function ScrollMorphHero({ lang, heroSchool, heroSubtitle, heroCta1, heroCta2 }: ScrollMorphHeroProps) {
-  const pathname = usePathname() || "/portfolio";
-  const basePath = pathname.startsWith("/portfolio") ? "/portfolio" : "";
+  const [basePath, setBasePath] = useState("/portfolio");
+  useEffect(() => {
+    if (!window.location.pathname.startsWith("/portfolio")) setBasePath("");
+  }, []);
   const [flipped, setFlipped] = useState<string | null>(null);
 
   const navigateTo = (href: string) => {
@@ -117,6 +118,13 @@ export default function ScrollMorphHero({ lang, heroSchool, heroSubtitle, heroCt
               onClick={() => navigateTo(card.href)}
               onMouseEnter={() => setFlipped(card.id)}
               onMouseLeave={() => setFlipped(null)}
+              onTouchStart={() => {
+                if (flipped !== card.id) {
+                  setFlipped(card.id);
+                } else {
+                  setFlipped(null);
+                }
+              }}
             >
               <motion.div
                 className="relative w-full h-full rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
@@ -126,7 +134,7 @@ export default function ScrollMorphHero({ lang, heroSchool, heroSubtitle, heroCt
               >
                 {/* Front */}
                 <div className="absolute inset-0" style={{ backfaceVisibility: "hidden" }}>
-                  <img src={card.img} alt={card.labelEn} className="w-full h-full object-cover" loading="lazy" />
+                  <img src={card.img} alt={lang === "zh" ? card.labelZh : card.labelEn} className="w-full h-full object-cover" loading="lazy" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-3 left-3 right-3">
                     <span className="text-xs sm:text-sm font-bold text-white uppercase tracking-wider">{lang === "zh" ? card.labelZh : card.labelEn}</span>

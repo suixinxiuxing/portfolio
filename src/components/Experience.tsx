@@ -1,14 +1,15 @@
 "use client";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { FiClock, FiMapPin } from "react-icons/fi";
 import SectionHeading from "./SectionHeading";
 import { useT } from "@/i18n/LanguageContext";
 
-const base = "/images/internship";
+const base = "images/internship";
 const internImgs = [`${base}/intern-1.jpg`, `${base}/intern-2.jpg`, `${base}/intern-3.jpg`, `${base}/intern-4.jpg`];
 
 export default function Experience() {
-  const { t: tt } = useT();
+  const { t: tt, lang } = useT();
 
   const internship = [{
     title: tt("experience.exp1Title"), org: tt("experience.exp1Org"),
@@ -19,7 +20,7 @@ export default function Experience() {
   const campus = [
     {
       title: tt("experience.exp2Title"), org: tt("experience.exp2Org"),
-      period: "2022.09 — 2023.09", loc: tt("experience.exp3Loc") || "厦门",
+      period: "2022.09 — 2023.09", loc: lang === "zh" ? "厦门" : "Xiamen",
       items: [tt("experience.exp2d1"), tt("experience.exp2d2")],
     },
     {
@@ -54,22 +55,22 @@ export default function Experience() {
         {/* Internship */}
         <div className="max-w-5xl mx-auto mb-20">
           <motion.div className="flex items-center gap-3 mb-8" initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-            <div className="w-8 h-8 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center text-[#7c3aed] text-xs font-bold">01</div>
+            <div className="w-8 h-8 rounded-xl bg-cyan-50 border border-cyan-200 flex items-center justify-center text-[#0b6779] text-xs font-bold">01</div>
             <div><span className="tag-framer text-xs">{tt("experience.internship")}</span><h3 className="text-xl font-bold text-gray-900 mt-1">{tt("experience.internshipTitle")}</h3></div>
           </motion.div>
-          {internship.map((e) => (
-            <motion.div key={e.title} className="card-framer p-7 sm:p-8 mb-4" variants={item} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+          {internship.map((e, i) => (
+            <motion.div key={i} className="card-framer p-7 sm:p-8 mb-4 border-l-2 border-l-blue-600" variants={item} initial="hidden" whileInView="visible" viewport={{ once: true }}>
               <h3 className="text-lg font-bold text-gray-900 mb-1">{e.title}</h3>
-              <p className="text-sm text-[#7c3aed] font-medium mb-3">{e.org}</p>
+              <p className="text-sm text-[#0b6779] font-medium mb-3">{e.org}</p>
               <div className="flex gap-4 text-xs text-gray-400 mb-5"><span className="flex items-center gap-1"><FiClock size={10}/>{e.period}</span><span className="flex items-center gap-1"><FiMapPin size={10}/>{e.loc}</span></div>
-              <ul className="space-y-3 text-sm text-gray-500 leading-relaxed">{e.items.map((d,j) => <li key={j} className="flex items-start gap-3"><span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#8b5cf6]/50 shrink-0"/>{d}</li>)}</ul>
+              <ul className="space-y-3 text-sm text-gray-500 leading-relaxed">{e.items.map((d,j) => <li key={j} className="flex items-start gap-3"><span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#0b6779]/50 shrink-0"/>{d}</li>)}</ul>
             </motion.div>
           ))}
-          <div className="grid grid-cols-4 gap-2 mt-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-4">
             {internImgs.map((src, i) => (
-              <motion.div key={i} className="aspect-[4/3] rounded-lg overflow-hidden border border-gray-100 hover:border-[#8b5cf6]/40 transition-colors cursor-pointer" whileHover={{ scale: 1.02 }}>
-                <img src={src} alt="" className="w-full h-full object-cover" loading="lazy" />
-              </motion.div>
+              <motion.a key={i} href={src} target="_blank" rel="noopener noreferrer" className="aspect-[4/3] rounded-lg overflow-hidden border border-gray-100 hover:border-[#0b6779]/40 transition-colors block" whileHover={{ scale: 1.02 }} aria-label={lang === "zh" ? `查看工程实习现场 ${i+1} 大图` : `View engineering internship photo ${i+1}`}>
+                <Image src={src} alt={lang === "zh" ? `工程实习现场 ${i+1}` : `Engineering internship site ${i+1}`} width={440} height={330} className="w-full h-full object-cover" loading="lazy" />
+              </motion.a>
             ))}
           </div>
         </div>
@@ -80,13 +81,13 @@ export default function Experience() {
             <div className="w-8 h-8 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-[#3b82f6] text-xs font-bold">02</div>
             <div><span className="tag-framer tag-framer-muted text-xs">{tt("experience.campus")}</span><h3 className="text-xl font-bold text-gray-900 mt-1">{tt("experience.campusTitle")}</h3></div>
           </motion.div>
-          <motion.div className="grid md:grid-cols-2 gap-4" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ visible: { transition: { staggerChildren: 0.08 } } }}>
-            {campus.map((e) => (
-              <motion.div key={e.title} className="card-framer p-7 flex flex-col" variants={item}>
+          <motion.div className="timeline" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ visible: { transition: { staggerChildren: 0.08 } } }}>
+            {campus.map((e, i) => (
+              <motion.div key={i} className="card-framer p-7 flex flex-col timeline-entry" variants={item}>
                 <h3 className="text-lg font-bold text-gray-900 mb-1">{e.title}</h3>
                 <p className="text-xs text-gray-400 mb-3">{e.org}</p>
                 <div className="flex gap-3 text-[10px] text-gray-400 mb-4"><span className="flex items-center gap-1"><FiClock size={10}/>{e.period}</span><span className="flex items-center gap-1"><FiMapPin size={10}/>{e.loc}</span></div>
-                <ul className="space-y-2 text-sm text-gray-500 leading-relaxed flex-1">{e.items.map((d,j) => <li key={j} className="flex items-start gap-2"><span className="mt-1.5 w-1 h-1 rounded-full bg-[#3b82f6]/50 shrink-0"/>{d}</li>)}</ul>
+                <details><summary>{lang === "zh" ? "查看职责与成果" : "View responsibilities and results"}</summary><ul className="space-y-2 text-sm text-gray-500 leading-relaxed flex-1">{e.items.map((d,j) => <li key={j} className="flex items-start gap-2"><span className="mt-1.5 w-1 h-1 rounded-full bg-[#3b82f6]/50 shrink-0"/>{d}</li>)}</ul></details>
               </motion.div>
             ))}
           </motion.div>

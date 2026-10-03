@@ -16,25 +16,40 @@ const LangContext = createContext<LangContextType>({
   t: translations,
 });
 
+function resolveTranslation(path: string): unknown {
+  let value: unknown = translations;
+  for (const segment of path.split(".")) {
+    if (!value || typeof value !== "object" || !(segment in value)) return undefined;
+    value = (value as Record<string, unknown>)[segment];
+  }
+  return value;
+}
+
 export function useT() {
-  const { lang, t: trans } = useContext(LangContext);
+  const { lang, toggleLang } = useContext(LangContext);
   return {
     lang,
-    toggleLang: () => {
-      const next = lang === "zh" ? "en" : "zh";
-      localStorage.setItem("lang", next);
-      window.location.reload();
+    toggleLang,
+    t: (key: string): string => {
+      const val = resolveTranslation(key);
+      if (val && typeof val === "object" && lang in val) {
+        const localized = (val as Record<Lang, unknown>)[lang];
+        if (typeof localized === "string") return localized;
+      }
+      if (process.env.NODE_ENV !== "production") console.warn(`Missing translation: ${key}`);
+      return "";
     },
-    t: (key: string) => {
-      const keys = key.split(".");
-      let val: unknown = trans;
-      for (const k of keys) {
-        val = (val as Record<string, unknown>)[k];
+    ta: (key: string): string[] => {
+      const val = resolveTranslation(key);
+      if (val && typeof val === "object" && lang in val) {
+        const localized = (val as Record<Lang, unknown>)[lang];
+        return Array.isArray(localized) ? localized as string[] : [];
       }
-      if (val && typeof val === "object" && "zh" in val) {
-        return (val as Record<Lang, string>)[lang];
+      if (Array.isArray(val)) {
+        // Each array element should be a {zh, en} object
+        return (val as Array<Record<Lang, string>>).map(v => v[lang]).filter(Boolean);
       }
-      return key;
+      return [];
     },
   };
 }
@@ -47,8 +62,18 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     if (saved === "zh" || saved === "en") setLang(saved);
   }, []);
 
+  useEffect(() => {
+    document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+  }, [lang]);
+
+  const toggleLang = () => {
+    const next = lang === "zh" ? "en" : "zh";
+    localStorage.setItem("lang", next);
+    setLang(next);
+  };
+
   return (
-    <LangContext.Provider value={{ lang, toggleLang: () => {}, t: translations }}>
+    <LangContext.Provider value={{ lang, toggleLang, t: translations }}>
       {children}
     </LangContext.Provider>
   );
