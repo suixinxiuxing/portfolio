@@ -144,13 +144,20 @@ details summary { font-size:14px; color:#1769aa; min-height:44px; padding-block:
 .morph-stats strong { font-size:21px; letter-spacing:-.04em; }
 .morph-stats span { color:#91bbc5; font-size:11px; }
 .morph-portrait-wrap { position:relative; width:min(100%,450px); justify-self:end; padding:30px 28px 42px; }
+.morph-portrait-wrap { perspective:1100px; }
+.morph-portrait-aura { position:absolute; inset:7% 0 4%; border-radius:50%; background:radial-gradient(ellipse,rgba(99,221,224,.24),transparent 66%); filter:blur(24px); animation:morph-aura 7s ease-in-out infinite alternate; pointer-events:none; }
+.morph-portrait-float { position:relative; z-index:1; animation:morph-portrait-float 6s ease-in-out infinite; }
+.morph-portrait-frame { transform-style:preserve-3d; will-change:transform; }
 .morph-portrait { position:relative; z-index:1; aspect-ratio:4/5; overflow:hidden; border:1px solid rgba(212,246,247,.5); background:#b5dce2; box-shadow:20px 20px 0 rgba(3,31,48,.28),0 25px 80px rgba(0,0,0,.22); }
+.morph-portrait::after { content:""; position:absolute; inset:0; border:1px solid rgba(228,255,255,.22); box-shadow:inset 0 0 38px rgba(212,250,250,.13); pointer-events:none; }
+.morph-portrait-sheen { position:absolute; z-index:2; width:55%; aspect-ratio:1; border-radius:50%; transform:translate(-50%,-50%); background:radial-gradient(circle,rgba(255,255,255,.26),rgba(194,247,248,.08) 45%,transparent 72%); mix-blend-mode:screen; opacity:0; pointer-events:none; transition:opacity .35s ease; }
+.morph-portrait-wrap:hover .morph-portrait-sheen { opacity:1; }
 .morph-portrait img { object-fit:cover; filter:saturate(.82) contrast(1.05); }
 .morph-portrait-label { position:absolute; z-index:2; top:12px; left:0; color:#a5dce1; font-size:10px; }
 .morph-portrait-caption { position:absolute; z-index:2; bottom:0; left:28px; right:0; display:flex; justify-content:space-between; gap:15px; color:#b7d9de; font-size:10px; }
 .morph-orbit { position:absolute; border:1px solid rgba(167,233,235,.3); border-radius:50%; transform:rotate(-18deg); pointer-events:none; }
-.morph-orbit-one { width:115%; height:65%; top:18%; left:-8%; }
-.morph-orbit-two { width:125%; height:75%; top:10%; left:-14%; transform:rotate(32deg); border-color:rgba(167,233,235,.14); }
+.morph-orbit-one { width:115%; height:65%; top:18%; left:-8%; animation:morph-orbit-one 16s ease-in-out infinite alternate; }
+.morph-orbit-two { width:125%; height:75%; top:10%; left:-14%; transform:rotate(32deg); border-color:rgba(167,233,235,.14); animation:morph-orbit-two 20s ease-in-out infinite alternate; }
 .morph-scroll-mark { position:absolute; top:50%; right:-10px; writing-mode:vertical-rl; color:#8dcbd2; font-size:10px; }
 .morph-card-rail { width:min(1180px,100%); margin:6px auto 0; }
 .morph-rail-heading { display:flex; justify-content:space-between; color:#8dcbd2; font-size:10px; margin-bottom:10px; }
@@ -172,10 +179,14 @@ details summary { font-size:14px; color:#1769aa; min-height:44px; padding-block:
 .morph-scroll-link svg { animation:morph-bob 1.8s ease-in-out infinite; }
 @keyframes morph-pulse { 50% { box-shadow:0 0 0 8px rgba(115,229,210,0); } }
 @keyframes morph-bob { 50% { transform:translateY(4px); } }
+@keyframes morph-portrait-float { 50% { transform:translateY(-10px); } }
+@keyframes morph-aura { to { transform:scale(1.15); opacity:.55; } }
+@keyframes morph-orbit-one { to { transform:rotate(14deg) scale(1.04); opacity:.55; } }
+@keyframes morph-orbit-two { to { transform:rotate(56deg) scale(.96); opacity:.75; } }
 @media(max-width:900px) { .morph-shell { gap:30px; } .morph-card-track { grid-template-columns:repeat(3,minmax(150px,1fr)); } }
 @media(max-width:767px) { .morph-hero { min-height:auto; padding-top:32px; } .morph-shell { grid-template-columns:1fr; min-height:0; gap:32px; } .morph-copy h1 { font-size:clamp(68px,20vw,104px); } .morph-copy h1 span { font-size:21px; } .morph-description { font-size:16px; } .morph-portrait-wrap { width:min(78vw,360px); justify-self:center; } .morph-card-rail { margin-top:38px; } .morph-card-track { display:flex; overflow-x:auto; overscroll-behavior-x:contain; padding:2px 2px 12px; scrollbar-width:none; } .morph-card-track::-webkit-scrollbar { display:none; } .morph-card { flex:0 0 160px; height:120px; } .morph-scroll-mark { right:-16px; } }
 @media(max-width:420px) { .morph-stats { gap:16px; } .morph-stats strong { font-size:18px; } .morph-card { flex-basis:145px; } }
-@media(prefers-reduced-motion:reduce) { .morph-status-dot,.morph-scroll-link svg { animation:none; } .morph-card-inner { transition:none; } .morph-spotlight { display:none; } }
+@media(prefers-reduced-motion:reduce) { .morph-status-dot,.morph-scroll-link svg,.morph-portrait-float,.morph-portrait-aura,.morph-orbit { animation:none; } .morph-card-inner,.morph-portrait-sheen { transition:none; } .morph-spotlight { display:none; } }
 
 /* Editorial ocean portfolio: shared rhythm and content hierarchy */
 body { background:var(--bg); color:var(--fg); }

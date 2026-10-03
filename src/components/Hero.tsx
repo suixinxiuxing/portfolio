@@ -35,6 +35,12 @@ export default function Hero() {
   const pointerY = useMotionValue(0);
   const springX = useSpring(pointerX, { stiffness: 80, damping: 22, mass: 0.8 });
   const springY = useSpring(pointerY, { stiffness: 80, damping: 22, mass: 0.8 });
+  const portraitPointerX = useMotionValue(0);
+  const portraitPointerY = useMotionValue(0);
+  const portraitTiltX = useSpring(useTransform(portraitPointerY, [-1, 1], [5, -5]), { stiffness: 120, damping: 22 });
+  const portraitTiltY = useSpring(useTransform(portraitPointerX, [-1, 1], [-6, 6]), { stiffness: 120, damping: 22 });
+  const portraitShineX = useSpring(useTransform(portraitPointerX, [-1, 1], ["15%", "85%"]), { stiffness: 120, damping: 22 });
+  const portraitShineY = useSpring(useTransform(portraitPointerY, [-1, 1], ["15%", "85%"]), { stiffness: 120, damping: 22 });
   const copyY = useTransform(scrollYProgress, [0, 0.18], [0, reduceMotion ? 0 : -78]);
   const copyOpacity = useTransform(scrollYProgress, [0, 0.16], [1, reduceMotion ? 1 : 0.28]);
   const portraitY = useTransform(scrollYProgress, [0, 0.2], [0, reduceMotion ? 0 : -36]);
@@ -45,6 +51,18 @@ export default function Hero() {
     const bounds = event.currentTarget.getBoundingClientRect();
     pointerX.set(event.clientX - bounds.left);
     pointerY.set(event.clientY - bounds.top);
+  };
+
+  const handlePortraitPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (reduceMotion || event.pointerType !== "mouse") return;
+    const bounds = event.currentTarget.getBoundingClientRect();
+    portraitPointerX.set(Math.max(-1, Math.min(1, ((event.clientX - bounds.left) / bounds.width - 0.5) * 2)));
+    portraitPointerY.set(Math.max(-1, Math.min(1, ((event.clientY - bounds.top) / bounds.height - 0.5) * 2)));
+  };
+
+  const resetPortraitPointer = () => {
+    portraitPointerX.set(0);
+    portraitPointerY.set(0);
   };
 
   return (
@@ -62,10 +80,18 @@ export default function Hero() {
           <div className="morph-stats" aria-label={lang === "zh" ? "个人概览" : "Profile overview"}><div><strong>{String(researchCounts.papers).padStart(2, "0")}</strong><span>{lang === "zh" ? "篇论文" : "Papers"}</span></div><div><strong>{String(researchCounts.patents).padStart(2, "0")}</strong><span>{lang === "zh" ? "项专利与申请" : "Patents & applications"}</span></div><div><strong>3/34</strong><span>{lang === "zh" ? "专业排名" : "Major rank"}</span></div></div>
         </motion.div>
 
-        <motion.div className="morph-portrait-wrap" style={{ y: portraitY }}>
+        <motion.div className="morph-portrait-wrap" style={{ y: portraitY }} onPointerMove={handlePortraitPointerMove} onPointerLeave={resetPortraitPointer}>
           <div className="morph-orbit morph-orbit-one" aria-hidden="true" /><div className="morph-orbit morph-orbit-two" aria-hidden="true" />
+          <div className="morph-portrait-aura" aria-hidden="true" />
           <div className="morph-portrait-label" aria-hidden="true">01 / PROFILE</div>
-          <motion.div className="morph-portrait" initial={reduceMotion ? false : { opacity: 0, scale: 0.92, rotate: 3 }} animate={{ opacity: 1, scale: 1, rotate: 0 }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}><GazePortrait label={lang === "zh" ? "陈希插画肖像" : "Illustrated portrait of Chen Xi"} /></motion.div>
+          <div className="morph-portrait-float">
+            <motion.div className="morph-portrait-frame" style={{ rotateX: portraitTiltX, rotateY: portraitTiltY }}>
+              <motion.div className="morph-portrait" initial={reduceMotion ? false : { opacity: 0, scale: 0.92, rotate: 3 }} animate={{ opacity: 1, scale: 1, rotate: 0 }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}>
+                <GazePortrait label={lang === "zh" ? "陈希插画肖像" : "Illustrated portrait of Chen Xi"} />
+                <motion.span className="morph-portrait-sheen" style={{ left: portraitShineX, top: portraitShineY }} aria-hidden="true" />
+              </motion.div>
+            </motion.div>
+          </div>
           <div className="morph-portrait-caption"><span>{lang === "zh" ? "水利工程 · 海洋工程" : "Hydraulic & Ocean Engineering"}</span><span>QINGDAO, CHINA</span></div><div className="morph-scroll-mark" aria-hidden="true">SCROLL / 01</div>
         </motion.div>
       </div>
