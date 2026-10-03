@@ -7,6 +7,8 @@ import SectionHeading from "./SectionHeading";
 import { useT } from "@/i18n/LanguageContext";
 import { resumeAwards } from "@/data/resume-awards";
 
+const awardsByDate = [...resumeAwards].sort((a, b) => b.date.localeCompare(a.date));
+
 type GalleryImage = { src: string; zh: string; en: string };
 
 const awardImage = (name: string, zh: string, en: string): GalleryImage => ({ src: `images/awards/${name}`, zh, en });
@@ -89,9 +91,9 @@ export default function Awards() {
     <div className="section-container">
       <SectionHeading label={lang === "zh" ? "荣誉 / 08" : "Recognition / 08"} title={lang === "zh" ? "荣誉与认可" : "Awards & recognition"} />
       <p className="section-intro">{lang === "zh" ? "按时间整理的获奖记录。需要查看证明材料时，可展开证书档案。" : "A dated record of awards, with certificate evidence available on demand."}</p>
-      <div className="recent-awards">{resumeAwards.slice(0, 4).map((award) => <span className="tag-framer" key={`${award.date}-${award.name.zh}`}>{award.name[lang]} · {award.date}</span>)}</div>
+      <div className="recent-awards">{awardsByDate.slice(0, 4).map((award) => <span className="tag-framer" key={`${award.date}-${award.name.zh}`}>{award.name[lang]} · {award.date}</span>)}</div>
       <details className="award-history"><summary>{lang === "zh" ? `查看完整获奖记录 · ${resumeAwards.length} 项` : `View complete award history · ${resumeAwards.length}`}</summary>
-        <ol className="award-records">{resumeAwards.map((award, index) => <li key={`${award.date}-${award.name.zh}-${index}`}><time dateTime={award.date}>{award.date}</time><span>{award.name[lang]}{award.rank ? ` · ${award.rank[lang]}` : ""}</span><small>{award.level[lang]}</small></li>)}</ol>
+        <ol className="award-records">{awardsByDate.map((award, index) => <li key={`${award.date}-${award.name.zh}-${index}`}><time dateTime={award.date}>{award.date}</time><span>{award.name[lang]}{award.rank ? ` · ${award.rank[lang]}` : ""}</span><small>{award.level[lang]}</small></li>)}</ol>
       </details>
       <div className="certificate-sections">
         {groups.map((group, index) => <details className="certificate-archive" key={group.id}>
