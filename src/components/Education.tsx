@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { FiClock, FiMapPin } from "react-icons/fi";
 import SectionHeading from "./SectionHeading";
 import { useT } from "@/i18n/LanguageContext";
@@ -7,8 +8,8 @@ import { useT } from "@/i18n/LanguageContext";
 export default function Education() {
   const { t: tt, ta } = useT();
   const edu = [
-    { school: tt("education.school1"), degree: tt("education.degree1"), period: tt("education.period1"), location: tt("education.loc1"), gpa: tt("education.gpa1"), avg: tt("education.avg1"), rank: tt("education.rank1"), awards: ta("education.awards1"), current: true },
-    { school: tt("education.school2"), degree: tt("education.degree2"), period: tt("education.period2"), location: tt("education.loc2"), gpa: tt("education.gpa2"), avg: tt("education.avg2"), rank: tt("education.rank2"), awards: ta("education.awards2"), current: false },
+    { school: tt("education.school1"), emblem: "images/schools/ouc-emblem.png", degree: tt("education.degree1"), period: tt("education.period1"), location: tt("education.loc1"), gpa: tt("education.gpa1"), avg: tt("education.avg1"), rank: tt("education.rank1"), awards: ta("education.awards1"), current: true },
+    { school: tt("education.school2"), emblem: "images/schools/jmu-emblem.png", degree: tt("education.degree2"), period: tt("education.period2"), location: tt("education.loc2"), gpa: tt("education.gpa2"), avg: tt("education.avg2"), rank: tt("education.rank2"), awards: ta("education.awards2"), current: false },
   ];
 
   return (
@@ -23,8 +24,13 @@ export default function Education() {
                 <div className="absolute left-[14px] top-2 w-[11px] h-[11px] rounded-full bg-[#0b6779] border-[2px] border-[#fafafa] ring-1 ring-[#0b6779]/20 hidden sm:block" />
                 <div className="card-framer p-7 sm:p-8">
                   <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
-                    <div><h3 className="text-base font-bold text-gray-900">{e.school}</h3><p className="text-[10px] text-[#0b6779] font-medium">{e.degree}</p></div>
-                    {e.current && <span className="tag-framer">{tt("education.current")}</span>}
+                    <div className="flex min-w-0 items-center gap-3">
+                      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#d7e8eb] bg-white p-1" aria-hidden="true">
+                        <Image src={e.emblem} alt="" width={40} height={40} className="h-10 w-10 object-contain" />
+                      </span>
+                      <div className="min-w-0"><h3 className="text-base font-bold text-gray-900">{e.school}</h3><p className="text-[10px] text-[#0b6779] font-medium">{e.degree}</p></div>
+                    </div>
+                    {e.current && <span className="tag-framer ml-auto">{tt("education.current")}</span>}
                   </div>
                   <div className="flex flex-wrap gap-4 text-[10px] text-gray-400 mb-4"><span className="flex items-center gap-1"><FiClock size={10}/> {e.period}</span><span className="flex items-center gap-1"><FiMapPin size={10}/> {e.location}</span></div>
                   <div className="grid grid-cols-3 gap-2 mb-4">
