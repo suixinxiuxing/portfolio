@@ -26,7 +26,7 @@ export default function Education() {
                   <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
                     <div className="flex min-w-0 items-center gap-3">
                       <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#d7e8eb] bg-white p-1" aria-hidden="true">
-                        <Image src={e.emblem} alt="" width={40} height={40} className="h-10 w-10 object-contain" />
+                        <Image src={e.emblem} alt="" width={40} height={40} className="h-auto w-10 object-contain" />
                       </span>
                       <div className="min-w-0"><h3 className="text-base font-bold text-gray-900">{e.school}</h3><p className="text-[10px] text-[#0b6779] font-medium">{e.degree}</p></div>
                     </div>
